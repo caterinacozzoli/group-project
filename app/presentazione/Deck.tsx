@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type FocusEvent, type MouseEvent, type PointerEvent, type ReactNode } from "react";
 import { asset } from "@/lib/asset";
 import s from "./presentazione.module.css";
 
@@ -16,6 +16,11 @@ export type Slide = { titolo: string; fase?: string; sintesi?: string; corpo?: R
 // Sotto i 1024 px (o 540 di altezza) niente tela 16:9: le slide si leggono una sotto l'altra e le frecce
 // scorrono la pagina. Così anche lo zoom al 200% ingrandisce davvero il testo. Stessa soglia nel CSS.
 const FLUSSO = "(max-width: 1023px), (max-height: 539px)";
+
+function chiudiRiquadro(d: HTMLDetailsElement) {
+  d.open = false;
+  delete d.dataset.hover;
+}
 
 // I `backtick` del JSON diventano <code>
 const testo = (t: string) => t.split(/`([^`]+)`/).map((p, k) => (k % 2 ? <code key={k}>{p}</code> : p));
@@ -33,10 +38,16 @@ export default function Deck({
   const [i, setI] = useState(0);
   const [annuncio, setAnnuncio] = useState("");
   const [aperto, setAperto] = useState<string | null>(null);
+  const [continua, setContinua] = useState(false);
+  const radice = useRef<HTMLDivElement>(null);
   const pannello = useRef<HTMLDialogElement>(null);
   const corrente = useRef(0);
+  const piatta = useRef(false);
   const spostaFocus = useRef(false);
   corrente.current = i;
+  piatta.current = continua;
+  // Slide impilate: schermo piccolo o "Vista continua" (con lo zoom del browser il testo cresce davvero)
+  const flusso = () => piatta.current || matchMedia(FLUSSO).matches;
 
   const vai = (n: number) => {
     const j = Math.max(0, Math.min(N - 1, n));
@@ -51,8 +62,51 @@ export default function Deck({
   useEffect(() => {
     if (!spostaFocus.current) return;
     spostaFocus.current = false;
-    document.getElementById(String(i + 1))?.focus();
-  }, [i]);
+    // In vista continua si scorre fino alla slide corrente; sulla tela la pagina non deve muoversi
+    document.getElementById(String(i + 1))?.focus({ preventScroll: !piatta.current });
+  }, [i, continua]);
+
+  // Scala della tela in JS: in Safari tan(atan2()) con vw/dvh dà 0 o valori sbagliati
+  useEffect(() => {
+    const scala = () => radice.current?.style.setProperty("--scala", String(Math.min(innerWidth / 1920, innerHeight / 1080)));
+    scala();
+    window.addEventListener("resize", scala);
+    return () => window.removeEventListener("resize", scala);
+  }, []);
+
+  // Swipe orizzontale (trackpad o dito) cambia slide; lo scorrimento verticale resta agli approfondimenti
+  useEffect(() => {
+    let ultimo = 0;
+    let x0 = 0;
+    let y0 = 0;
+    const libera = () => !pannello.current?.open && !flusso();
+    const rotella = (e: WheelEvent) => {
+      if (!libera() || Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+      e.preventDefault(); // niente "pagina indietro" del browser
+      if (Math.abs(e.deltaX) < 4) return;
+      // ponytail: un gesto = una slide, finché gli eventi d'inerzia arrivano a meno di 250 ms l'uno dall'altro
+      const nuovo = e.timeStamp - ultimo > 250;
+      ultimo = e.timeStamp;
+      if (nuovo) vai(corrente.current + Math.sign(e.deltaX));
+    };
+    const tocca = (e: TouchEvent) => {
+      x0 = e.touches[0].clientX;
+      y0 = e.touches[0].clientY;
+    };
+    const lascia = (e: TouchEvent) => {
+      const dx = e.changedTouches[0].clientX - x0;
+      if (libera() && Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(e.changedTouches[0].clientY - y0)) vai(corrente.current - Math.sign(dx));
+    };
+    window.addEventListener("wheel", rotella, { passive: false });
+    window.addEventListener("touchstart", tocca, { passive: true });
+    window.addEventListener("touchend", lascia);
+    return () => {
+      window.removeEventListener("wheel", rotella);
+      window.removeEventListener("touchstart", tocca);
+      window.removeEventListener("touchend", lascia);
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
 
   // #7 nell'URL apre la settima slide
   useEffect(() => {
@@ -68,7 +122,9 @@ export default function Deck({
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.metaKey || e.ctrlKey || e.altKey || pannello.current?.open || matchMedia(FLUSSO).matches) return;
+      // Esc chiude i riquadri aperti dal mouse (non quando chiude il pannello)
+      if (e.key === "Escape" && !pannello.current?.open) document.querySelectorAll<HTMLDetailsElement>("details[data-hover]").forEach(chiudiRiquadro);
+      if (e.metaKey || e.ctrlKey || e.altKey || pannello.current?.open || flusso()) return;
       const t = e.target as HTMLElement;
       if (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
       const k = e.key;
@@ -91,8 +147,32 @@ export default function Deck({
     if (aperto) pannello.current?.showModal();
   }, [aperto]);
 
-  // I "+" sono bottoni statici con data-piu: un solo listener per tutti
+  // "Cosa abbiamo imparato" sono <details>: il mouse li apre passando sopra, clic o focus li fissano aperti
+  const riquadro = (e: { target: EventTarget; relatedTarget: EventTarget | null }, sel: string) => {
+    const d = (e.target as Element).closest<HTMLDetailsElement>(sel);
+    return d && !d.contains(e.relatedTarget as Node) ? d : null;
+  };
+  const sopra = (e: PointerEvent) => {
+    const d = riquadro(e, "details");
+    if (e.pointerType !== "mouse" || !d || d.open || pannello.current?.open) return;
+    d.open = true;
+    d.dataset.hover = "";
+  };
+  const fuori = (e: PointerEvent) => {
+    const d = riquadro(e, "details[data-hover]");
+    if (d && !pannello.current?.open && !d.contains(document.activeElement)) chiudiRiquadro(d);
+  };
+  const fissa = (e: FocusEvent | MouseEvent) => {
+    const d = (e.target as Element).closest<HTMLDetailsElement>("details[data-hover]");
+    if (!d) return;
+    delete d.dataset.hover;
+    // Clic sul titolo di un riquadro aperto dal mouse: resta aperto invece di richiudersi
+    if (e.type === "click" && (e.target as Element).closest("summary")) e.preventDefault();
+  };
+
+  // I bottoni dell'approfondimento sono statici con data-piu: un solo listener per tutti
   const apri = (e: MouseEvent) => {
+    fissa(e);
     const b = (e.target as Element).closest<HTMLElement>("[data-piu]");
     if (b?.dataset.piu) setAperto(b.dataset.piu);
   };
@@ -100,7 +180,27 @@ export default function Deck({
   const a = aperto ? approfondimenti[aperto] : null;
 
   return (
-    <div className={`${s.deck} ${className}`} onClick={apri}>
+    <div
+      ref={radice}
+      className={`${s.deck} ${className}`}
+      data-continua={continua || undefined}
+      onClick={apri}
+      onFocus={fissa}
+      onPointerOver={sopra}
+      onPointerOut={fuori}
+    >
+      {/* Solo dove c'è la tela: impila tutte le slide, così lo zoom del browser ingrandisce il testo */}
+      <button
+        type="button"
+        className={s.vista}
+        aria-pressed={continua}
+        onClick={() => {
+          setContinua(!continua);
+          if (!continua) spostaFocus.current = true;
+        }}
+      >
+        Vista continua
+      </button>
       <main className={s.tela}>
         {/* Le slide spente sono display:none: l'h1 resta fuori, sempre presente */}
         <h1 className="sr-only">Presentazione: {slides[0].titolo}</h1>

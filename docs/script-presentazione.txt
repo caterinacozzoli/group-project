@@ -4,10 +4,12 @@ Presentazione: https://caterinacozzoli.github.io/group-project/presentazione/
 
 Come si legge
 - Tre blocchi, uno per oratore. Ognuno parla per il suo blocco, poi passa la parola.
-- [+ nome] = approfondimento facoltativo: si apre col "+" solo se c'è tempo o se qualcuno lo chiede.
+- [+ nome] = approfondimento facoltativo: si apre con la lampadina accanto al nome, solo se c'è tempo o se qualcuno lo chiede.
   Gli approfondimenti sono scritti come guide: comandi e passi per rifare il workflow o costruirne uno proprio.
   Si possono lasciare da leggere dopo, sul link della presentazione.
-- Tasti: frecce per avanzare, F per lo schermo intero, Esc chiude un approfondimento.
+- I riquadri «Cosa abbiamo imparato» sono chiusi: si aprono passandoci sopra col mouse (o con un clic). Apritelo quando
+  arrivate al punto, così la slide resta pulita mentre parlate.
+- Tasti: frecce per avanzare (o swipe orizzontale sul trackpad), F per lo schermo intero, Esc chiude un approfondimento.
 - Tono: raccontiamo il workflow che abbiamo costruito insieme, ci fermiamo solo sulle cose meno ovvie.
 
 Tempi indicativi
@@ -85,7 +87,7 @@ Playwright per le verifiche: l'agente usa il browser.
 Accessibility agents a ogni modifica dell'interfaccia: revisione WCAG 2.2 AA.
 Si installano dal terminale di Claude Code con /plugin.
 Cosa abbiamo imparato: sulla homepage niente skill che ne cambino l'aspetto, perché doveva restare identica al Figma. Le skill di design le abbiamo tenute per Libby.
-[+ un "+" per ogni skill] [+ Installazione]
+[+ una lampadina per ogni skill] [+ Installazione]
 
 SLIDE 9 · Da Figma alle variabili e al codice
 Primo risultato: la homepage importata identica.

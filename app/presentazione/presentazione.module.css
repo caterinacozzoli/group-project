@@ -178,19 +178,22 @@
 .segno {
   display: inline-grid;
   place-items: center;
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   margin-left: 10px;
-  border: 1px solid var(--grigio);
   border-radius: 50%;
-  color: var(--grigio);
-  font: 300 22px / 1 var(--sans);
+  background: rgb(23 23 23 / 0.08);
+  color: var(--nero);
   vertical-align: middle;
   transition: background-color 0.15s, color 0.15s;
 }
+.segno svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
 .piu:hover .segno {
   background: var(--nero);
-  border-color: var(--nero);
   color: #fff;
 }
 
@@ -201,6 +204,44 @@
   gap: 8px;
   padding: 20px;
   border: 1px solid var(--linea);
+}
+
+/* "Cosa abbiamo imparato": chiuso, si apre col mouse sopra (Deck.tsx) o con clic e Invio */
+.apribile {
+  display: block;
+}
+.apribile summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  /* area di clic più alta senza spostare il testo */
+  padding-block: 12px;
+  margin-block: -12px;
+  list-style: none;
+  cursor: pointer;
+}
+.apribile summary::-webkit-details-marker {
+  display: none;
+}
+.apribile summary svg {
+  flex: none;
+  width: 1.4em;
+  height: 1.4em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.apribile[open] summary svg {
+  rotate: 180deg;
+}
+.apribile > :not(summary) {
+  margin-top: 12px;
+}
+.apribile[open] > summary + * {
+  margin-top: 20px;
 }
 
 /* Loghi monocromi: neri come il testo */
@@ -373,7 +414,8 @@
   font-size: calc(var(--t-titolo) * 1.25);
 }
 
-.nav {
+.nav,
+.vista {
   display: none;
 }
 
@@ -404,6 +446,11 @@
   height: 100%;
   padding: 24px 32px 48px;
   overflow-y: auto;
+  overscroll-behavior: contain;
+}
+/* Con il pannello aperto la pagina sotto resta ferma */
+:global(html):has(.pannello[open]) {
+  overflow: hidden;
 }
 .pannello .etichetta {
   font-size: 14px;
@@ -485,7 +532,38 @@
 /* ══ Tela 1920 × 1080 (stessa soglia di FLUSSO in Deck.tsx) ══ */
 
 @media (min-width: 1024px) and (min-height: 540px) {
-  .deck {
+  /* "Vista continua" (data-continua) spegne la tela: slide impilate anche su schermi grandi */
+  .vista {
+    position: fixed;
+    left: 12px;
+    bottom: 12px;
+    display: block;
+    height: 44px;
+    padding: 0 16px;
+    border-radius: 22px;
+    color: var(--nero);
+    font: 400 15px / 1 var(--sans);
+  }
+  .vista:hover {
+    background: #f2f2f2;
+  }
+  .deck[data-continua] {
+    display: flow-root; /* il margine del bottone non esce dal deck */
+  }
+  .deck[data-continua] .vista {
+    position: static;
+    margin: 16px 16px 0;
+    background: var(--nero);
+    color: #fff;
+  }
+  .deck[data-continua] .tela {
+    max-width: 1040px;
+    margin-inline: auto;
+  }
+
+  .deck:not([data-continua]) {
+
+  & {
     /* Leggibilità in proiezione (frame 1920): etichette 18, dettagli 20, descrizioni 24. Titoli come nel Figma. */
     --t-etichetta: 18px;
     --t-dettaglio: 20px;
@@ -493,11 +571,13 @@
     --t-voce: 31px;
     --t-titolo: 64px;
     /* ponytail: tan(atan2(a, b)) = a / b senza unità, così la scala della tela è solo CSS */
-    --k: min(tan(atan2(100vw, 1920px)), tan(atan2(100dvh, 1080px)));
+    /* --scala la scrive Deck.tsx (min(larghezza / 1920, altezza / 1080)); fino ad allora la tela è invisibile */
+    --k: var(--scala, 0);
 
     position: fixed;
     inset: 0;
-    overflow: hidden;
+    /* clip e non hidden: focus e #ancore non possono far scorrere la tela fuori centro */
+    overflow: clip;
   }
 
   .tela {
@@ -529,7 +609,7 @@
     display: none;
     padding: 121px 72px 0;
     border: 0;
-    overflow: hidden;
+    overflow: clip;
   }
   .slide[data-attiva] {
     display: block;
@@ -557,6 +637,14 @@
   .icona {
     width: 52px;
     height: 52px;
+  }
+  .segno {
+    width: 36px;
+    height: 36px;
+  }
+  .segno svg {
+    width: 22px;
+    height: 22px;
   }
   .simbolo {
     height: 76px;
@@ -660,6 +748,13 @@
   .tabella td {
     padding: 16px 24px 16px 0;
   }
+  .tabella thead th {
+    padding-top: 0;
+  }
+  /* la lampadina resta sulla riga del nome */
+  .tabella tbody th {
+    white-space: nowrap;
+  }
   .tabella td {
     font-size: var(--t-testo);
   }
@@ -754,7 +849,7 @@
     justify-self: center;
   }
   .verifica .righe {
-    --col: 380px;
+    --col: 440px;
   }
   .avvio .corpo {
     grid-template-columns: 1fr 760px;
@@ -787,7 +882,7 @@
     column-gap: 56px;
   }
   .trio .righe {
-    --col: 240px;
+    --col: 280px;
   }
 
   .primaDopo {
@@ -892,5 +987,6 @@
   .contatore {
     min-width: 4.5em;
     text-align: center;
+  }
   }
 }

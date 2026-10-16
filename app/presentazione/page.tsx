@@ -69,12 +69,16 @@ function Logo({ nome }: { nome: string }) {
   return <img className={s.logo} src={asset(`/presentazione/loghi/${nome}.svg`)} alt="" />;
 }
 
-// Il "+" discreto: Deck apre il pannello leggendo data-piu
+// La lampadina accanto al testo: Deck apre il pannello leggendo data-piu
 function Piu({ id, children }: { id: keyof typeof approfondimenti; children: ReactNode }) {
   return (
     <button type="button" className={s.piu} data-piu={id} aria-haspopup="dialog">
       {children}
-      <span className={s.segno} aria-hidden="true">+</span>
+      <span className={s.segno} aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2ZM9 20h6v.5a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 20.5Z" />
+        </svg>
+      </span>
       <span className="sr-only">, approfondimento</span>
     </button>
   );
@@ -117,13 +121,34 @@ function Voce({
   );
 }
 
-// I riquadri a margine: "Cosa abbiamo imparato" per le scelte, "Cos'è…" per i concetti
+// I riquadri a margine: "Cos'è…" per i concetti, sempre aperti
 function Riquadro({ titolo, piu, children }: { titolo: string; piu?: keyof typeof approfondimenti; children: ReactNode }) {
   return (
     <div className={s.perche}>
       <h3 className={s.etichetta}>{piu ? <Piu id={piu}>{titolo}</Piu> : titolo}</h3>
       <p>{children}</p>
     </div>
+  );
+}
+
+// "Cosa abbiamo imparato" per le scelte: chiuso, si apre col mouse sopra (Deck.tsx), clic o Invio
+function Imparato({ tema, piu, children }: { tema?: string; piu?: keyof typeof approfondimenti; children: ReactNode }) {
+  return (
+    <details className={`${s.perche} ${s.apribile}`}>
+      <summary className={s.etichetta}>
+        {IMPARATO}
+        {tema && ` · ${tema}`}
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </summary>
+      <p>{children}</p>
+      {piu && (
+        <p className={s.dettaglio}>
+          <Piu id={piu}>Approfondisci</Piu>
+        </p>
+      )}
+    </details>
   );
 }
 
@@ -221,9 +246,9 @@ const SLIDES: Slide[] = [
           <p className={s.dettaglio}>Durante il Master Talent Garden</p>
         </div>
         <Foto src="/presentazione/figma-home.png" alt="La homepage Libraccio nel Figma di Gaia" w={584} h={840} />
-        <Riquadro titolo={IMPARATO}>
+        <Imparato>
           Conta dove gira l&apos;agente. In Antigravity Claude lavora sul nostro computer: raggiunge il file Figma aperto, avvia il sito e lo controlla nel browser.
-        </Riquadro>
+        </Imparato>
       </>
     ),
   },
@@ -245,9 +270,9 @@ const SLIDES: Slide[] = [
           </Voce>
           <Voce etichetta="Risultato" icona="panels-top-left" titolo="Prototipo online" />
         </div>
-        <Riquadro titolo={IMPARATO}>
+        <Imparato>
           Claude Desktop per decidere, conversando e leggendo il Figma con il connettore. Antigravity per costruire, perché lì l&apos;agente lavora sul computer.
-        </Riquadro>
+        </Imparato>
       </>
     ),
   },
@@ -267,9 +292,9 @@ const SLIDES: Slide[] = [
               <code>BRIEF.md</code>, <code>libby-anima.md</code>, <code>PROMPT-ANTIGRAVITY.md</code>
             </Voce>
           </div>
-          <Riquadro titolo={IMPARATO}>
+          <Imparato>
             Le decisioni non restano nella memoria di una chat. Stanno in file che si rileggono, si versionano e si passano a un altro agente o a un collega.
-          </Riquadro>
+          </Imparato>
         </div>
         <Foto
           className={s.schermata}
@@ -321,7 +346,7 @@ const SLIDES: Slide[] = [
               Generato con Meta AI, ritoccato, poi vettorializzato con Vizcom
             </Voce>
           </div>
-          <Riquadro titolo={IMPARATO}>L&apos;agente parte da file, non da spiegazioni a voce: meno ambiguità e un risultato ripetibile.</Riquadro>
+          <Imparato>L&apos;agente parte da file, non da spiegazioni a voce: meno ambiguità e un risultato ripetibile.</Imparato>
         </div>
       </>
     ),
@@ -354,9 +379,9 @@ const SLIDES: Slide[] = [
           <Riquadro titolo="Cos'è MCP">
             Uno standard aperto per collegare un agente AI a strumenti esterni (Figma, browser, GitHub), come una presa universale.
           </Riquadro>
-          <Riquadro titolo={IMPARATO}>
+          <Imparato>
             figma-ui-mcp gira in locale, senza API key e senza limiti di chiamate. Il connettore Figma ufficiale le aveva già esaurite.
-          </Riquadro>
+          </Imparato>
         </div>
       </>
     ),
@@ -385,9 +410,9 @@ const SLIDES: Slide[] = [
               Estratto da <Piu id="prompt-avvio"><code>PROMPT-ANTIGRAVITY.md</code></Piu>
             </figcaption>
           </figure>
-          <Riquadro titolo={IMPARATO}>
+          <Imparato>
             Domande prima del codice e ipotesi dichiarate alla fine. Il controllo resta a chi progetta, senza decisioni nascoste.
-          </Riquadro>
+          </Imparato>
         </div>
         <figure className={s.domande}>
           <ol role="list">
@@ -461,9 +486,9 @@ const SLIDES: Slide[] = [
           <Riquadro titolo="Cos'è una skill">
             Istruzioni che l&apos;agente carica quando servono: competenze specifiche senza riscriverle ogni volta nel prompt.
           </Riquadro>
-          <Riquadro titolo={IMPARATO}>
+          <Imparato>
             Sulla homepage niente skill che ne cambino l&apos;aspetto: doveva restare identica al Figma. Le skill di design le abbiamo usate solo per Libby.
-          </Riquadro>
+          </Imparato>
         </div>
       </>
     ),
@@ -492,10 +517,10 @@ const SLIDES: Slide[] = [
           <Riquadro titolo="Cosa sono i token" piu="stack">
             Un&apos;unica fonte per colori, testi e spazi. Se cambia un valore cambia ovunque, come nel Figma.
           </Riquadro>
-          <Riquadro titolo={IMPARATO}>
+          <Imparato>
             Alcune immagini uscivano vuote: il frame aveva attivo «ritaglia contenuto» (clipsContent). Claude ha chiesto il permesso, l&apos;ha disattivato per
             l&apos;export e l&apos;ha riattivato.
-          </Riquadro>
+          </Imparato>
         </div>
         <div className={s.primaDopo}>
           <Foto src="/presentazione/figma-home.png" alt="La homepage nel Figma" w={584} h={840} didascalia="Prima · Figma" />
@@ -520,10 +545,10 @@ const SLIDES: Slide[] = [
         </div>
         <Foto src="/presentazione/cmdD-mobile.png" alt="Anteprima Cmd+D: la homepage nella cornice iPhone" w={1440} h={900} didascalia="⌘D · mobile" />
         <Foto src="/presentazione/cmdD-tablet.png" alt="Anteprima Cmd+D: la homepage nella cornice iPad" w={1440} h={900} didascalia="⌘D · tablet" />
-        <Riquadro titolo={IMPARATO}>
+        <Imparato>
           ⌘D è uno strumento su misura: l&apos;abbiamo chiesto in una frase e l&apos;agente l&apos;ha costruito per questo progetto. Ogni progetto può avere le sue
           scorciatoie.
-        </Riquadro>
+        </Imparato>
       </>
     ),
   },
@@ -581,11 +606,11 @@ const SLIDES: Slide[] = [
           <Voce titolo="Design" piu="libby-design">Impeccable e UI/UX Pro Max, solo qui</Voce>
         </div>
         <div className={s.pila}>
-          <Riquadro titolo={`${IMPARATO} · senza API`}>
+          <Imparato tema="senza API">
             Zero costi, nessuna chiave nel repo pubblico, risposte prevedibili e testabili (<code>npm run check:libby</code>). Domani si collega a un modello AI vero,
             con la stessa interfaccia.
-          </Riquadro>
-          <Riquadro titolo={`${IMPARATO} · le skill solo qui`}>La homepage è il Figma e non si tocca. La libertà di design va dove aggiunge valore.</Riquadro>
+          </Imparato>
+          <Imparato tema="le skill solo qui">La homepage è il Figma e non si tocca. La libertà di design va dove aggiunge valore.</Imparato>
         </div>
         <div className={s.coppia}>
           <Foto className={s.telefono} src="/presentazione/libby-welcome.png" alt="Libby si presenta: Ciao Marica, cosa leggiamo oggi?" w={393} h={852} />
@@ -609,10 +634,10 @@ const SLIDES: Slide[] = [
               <code>check:libby</code> controlla le regole di Libby
             </Voce>
           </div>
-          <Riquadro titolo={IMPARATO} piu="hook">
+          <Imparato piu="hook">
             La verifica è ripetibile e veloce, senza test a mano. L&apos;accessibilità si controlla mentre si scrive: un hook ferma i file dell&apos;interfaccia
             finché non passano la revisione.
-          </Riquadro>
+          </Imparato>
         </div>
         <Foto
           className={s.telefono}
@@ -639,12 +664,12 @@ const SLIDES: Slide[] = [
           <Voce logo="githubactions" titolo="GitHub Actions" freccia="destra">Compila</Voce>
           <Voce icona="panels-top-left" titolo="GitHub Pages">Pubblica</Voce>
         </div>
-        <Riquadro titolo={`${IMPARATO} · in locale`}>
+        <Imparato tema="in locale">
           Su <code>localhost</code> il sito lo vediamo solo noi. Per condividerlo serve un passaggio a parte: GitHub e una pubblicazione.
-        </Riquadro>
-        <Riquadro titolo={`${IMPARATO} · la pubblicazione`} piu="pubblicazione">
+        </Imparato>
+        <Imparato tema="la pubblicazione" piu="pubblicazione">
           Login dal browser, nessun token da copiare. A ogni push Actions ricompila e Pages pubblica, gratis: il sito è statico, non serve un server.
-        </Riquadro>
+        </Imparato>
         <Foto
           className={s.schermata}
           src="/presentazione/actions.png"
