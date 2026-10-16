@@ -27,6 +27,54 @@
   color: var(--neutral-10);
   font: var(--body-1);
   opacity: .85;
-  pointer-events: none;
 }
+.etichetta:hover { opacity: 1; }
 .etichetta kbd { font: inherit; opacity: .7; margin-left: 4px; }
+
+/* Pop up "⌘D" alla prima visita */
+.tip {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  translate: -50% 0;
+  z-index: 1002;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: calc(100% - 200px); /* lascia libero il bottone di Libby */
+  padding: 8px 8px 8px 16px;
+  border-radius: var(--radius-round);
+  background: var(--neutral-60);
+  color: var(--neutral-10);
+  font: var(--body-1);
+  font-size: 14px;
+  box-shadow: var(--shadow-200);
+}
+.tip kbd {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, .15);
+  font: var(--body-1-bold);
+}
+.prova {
+  flex: none;
+  padding: 8px 12px;
+  border-radius: var(--radius-round);
+  background: var(--accent-30);
+  color: var(--primary-100);
+  font: var(--body-1-bold);
+}
+.prova:hover { background: var(--accent-40); }
+.chiudi {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+.chiudi:hover { background: rgba(255, 255, 255, .15); }
+@media (prefers-reduced-motion: no-preference) {
+  .tip { animation: entra .3s ease-out; }
+}
+@keyframes entra { from { opacity: 0; translate: -50% 12px; } }
