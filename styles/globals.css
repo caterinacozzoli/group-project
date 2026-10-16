@@ -1,6 +1,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html, body { margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
 body {
   background: var(--bg-neutral-secondary);
@@ -17,6 +18,11 @@ img { display: block; max-width: 100%; }
 
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
+}
+
+/* Touch: niente ritardo sul tap (invisibile, non cambia l'aspetto) */
+@media (pointer: coarse) {
+  a, button { touch-action: manipulation; }
 }
 
 .sr-only {

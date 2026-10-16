@@ -14,3 +14,7 @@
 @media (min-width: 768px) {
   .bar { display: none; }
 }
+/* Su un telefono vero c'è già la status bar di sistema: questa resta solo nel mockup */
+@media (pointer: coarse) {
+  .bar { display: none; }
+}

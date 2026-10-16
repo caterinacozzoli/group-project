@@ -1,155 +1,359 @@
-/* Libby non ha un design in Figma: pannello costruito solo con token e stili della homepage */
+/* Libby non è nel Figma: design libero, ma solo con i token e il linguaggio visivo di Libraccio */
 
+:global(html[data-libby-aperta]) { overflow: hidden; }
+
+/* ── Bottone flottante ─────────────────────────────────────────── */
 .fab {
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
   position: fixed;
-  right: 16px;
-  bottom: 16px;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: calc(16px + env(safe-area-inset-bottom));
   z-index: 10;
   width: 76px;
   height: 76px;
+  padding: 14px;
   border-radius: 50%;
-  overflow: hidden;
-  padding: 12px;
   background: var(--neutral-10);
-  box-shadow: var(--shadow-200);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .06), 0 8px 24px rgba(15, 126, 57, .18);
+  transition: scale .2s var(--ease-out), box-shadow .2s var(--ease-out);
 }
 .fab img { width: 100%; height: 100%; object-fit: contain; }
-.fab:hover { box-shadow: 0 4px 12px rgba(0, 0, 0, .15); }
-
-/* Reset del <dialog> nativo */
-.panel {
-  margin: auto 0 0;
-  padding: 0;
-  border: 0;
-  width: 100%;
-  max-width: 100%;
-  height: 85dvh;
-  max-height: 85dvh;
-  color: var(--text-primary);
-  background: var(--bg-neutral-secondary);
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-  box-shadow: var(--shadow-200);
+.fab:active { scale: .94; }
+@media (hover: hover) {
+  .fab:hover { box-shadow: 0 2px 4px rgba(0, 0, 0, .08), 0 12px 32px rgba(15, 126, 57, .26); }
 }
-.panel[open] { display: flex; flex-direction: column; }
-.panel::backdrop { background: rgba(0, 0, 0, .3); }
-
-@media (prefers-reduced-motion: no-preference) {
-  .panel[open] { animation: sale .25s ease-out; }
-}
-@keyframes sale { from { translate: 0 24px; opacity: 0; } }
-
 @media (min-width: 1024px) {
   .fab { right: 24px; bottom: 24px; }
-  .panel {
-    margin: auto 24px 24px auto;
-    width: 400px;
-    height: min(640px, 80dvh);
-    border-radius: var(--radius-xl);
-  }
 }
 
+/* Anello di fuoco solo da tastiera, dentro Libby */
+.fab:focus-visible,
+.panel :focus-visible {
+  outline: 2px solid var(--primary-100);
+  outline-offset: 2px;
+}
+
+/* ── Pannello (<dialog> nativo, stili del browser azzerati) ─────── */
+.panel {
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --ease-in: cubic-bezier(.4, 0, 1, 1);
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  max-width: none;
+  max-height: none;
+  overflow: hidden;
+  color: var(--text-primary);
+  background: var(--bg-neutral-secondary);
+  /* Telefono: schermo intero, alto quanto l'area visibile (tastiera esclusa) */
+  top: var(--vv-top, 0);
+  left: 0;
+  width: 100%;
+  height: var(--vv-h, 100dvh);
+}
+.panel[open] { display: flex; flex-direction: column; }
+.panel::backdrop { background: rgba(16, 16, 16, .32); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .panel { transition: translate .25s var(--ease-out); } /* ritorno dopo un trascinamento corto */
+  .panel[open] { animation: sale .36s var(--ease-out); }
+  .panel[open]::backdrop { animation: compare .36s var(--ease-out); }
+  .chiusura[open] { animation: scende .2s var(--ease-in) forwards; }
+  .chiusura[open]::backdrop { animation: svanisce .2s var(--ease-in) forwards; }
+}
+.trascina { transition: none; }
+
+@keyframes sale { from { translate: 0 100%; } }
+@keyframes scende { to { translate: 0 100%; } }
+@keyframes compare { from { opacity: 0; } }
+@keyframes svanisce { to { opacity: 0; } }
+
+/* Tablet e desktop: pannello flottante in basso a destra */
+@media (min-width: 768px) {
+  .panel {
+    top: auto;
+    left: auto;
+    right: 24px;
+    bottom: 24px;
+    width: 400px;
+    height: min(680px, calc(100dvh - 48px));
+    border-radius: var(--radius-xl);
+    box-shadow: 0 24px 64px rgba(16, 16, 16, .22), 0 2px 8px rgba(16, 16, 16, .08);
+    transform-origin: bottom right;
+  }
+  .panel::backdrop { background: rgba(16, 16, 16, .16); }
+  .maniglia { display: none; }
+}
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .panel[open] { animation: appare .24s var(--ease-out); }
+  .chiusura[open] { animation: sparisce .16s var(--ease-in) forwards; }
+}
+@keyframes appare { from { opacity: 0; translate: 0 16px; scale: .97; } }
+@keyframes sparisce { to { opacity: 0; translate: 0 12px; scale: .98; } }
+
+/* ── Intestazione (si trascina giù per chiudere) ───────────────── */
 .head {
+  position: relative;
+  flex: none;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 16px;
+  padding: calc(env(safe-area-inset-top) + 18px) 16px 12px;
   background: var(--neutral-10);
-  box-shadow: var(--shadow-sospensione);
+  border-bottom: 1px solid var(--bg-grey);
+  touch-action: none;
+  user-select: none;
 }
-.avatar { width: 44px; height: 44px; padding: 6px; border-radius: 50%; object-fit: contain; background: var(--bg-neutral-secondary); }
-.headTesti { flex: 1; }
-.titolo { font: var(--subh3); }
-.sottotitolo { font: var(--body-1); color: var(--text-tertiary); }
-.chiudi {
+.maniglia {
+  position: absolute;
+  top: calc(env(safe-area-inset-top) + 6px);
+  left: 50%;
+  translate: -50% 0;
+  width: 36px;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--neutral-30);
+}
+.avatarPiccolo,
+.avatarMini,
+.avatarGrande {
+  flex: none;
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
-  border: 2px solid var(--primary-90);
-  border-radius: 100px;
-  color: var(--primary-90);
+  border-radius: 50%;
+  background: var(--primary-20);
 }
-.chiudi:hover { background: var(--primary-10); }
-
-.log {
-  flex: 1;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 16px;
-}
-.libby, .utente {
-  max-width: 90%;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 12px;
-  font: var(--body-1);
-  font-size: 14px;
-  line-height: 1.45;
-}
-.libby {
-  align-self: flex-start;
-  background: var(--neutral-10);
-  border-radius: var(--radius-l) var(--radius-l) var(--radius-l) 4px;
-  box-shadow: var(--shadow-sospensione);
-}
-.utente {
-  align-self: flex-end;
-  background: var(--primary-90);
-  color: var(--neutral-10);
-  border-radius: var(--radius-l) var(--radius-l) 4px var(--radius-l);
-}
-
-.consigli { display: flex; flex-direction: column; gap: 8px; }
-.consiglio { display: flex; gap: 12px; padding: 8px; border-radius: var(--radius-m); background: var(--bg-neutral-secondary); }
-.consiglio img { flex: none; width: 48px; height: 74px; object-fit: contain; border-radius: 4px; }
-.libroTitolo { font: var(--body-1-bold); font-size: 14px; }
-.libroTitolo a:hover { text-decoration: underline; }
-.libroAutore { font: var(--body-1); color: var(--text-tertiary); }
-.perche { font: var(--body-1); margin-top: 4px; }
-.promo { font: var(--body-1-bold); color: var(--text-brand-primary-inverse); margin-top: 2px; }
-
-.scrive { align-self: flex-start; display: flex; gap: 4px; padding: 14px 12px; background: var(--neutral-10); border-radius: var(--radius-l); }
-.scrive span { width: 6px; height: 6px; border-radius: 50%; background: var(--text-muted); }
-@media (prefers-reduced-motion: no-preference) {
-  .scrive span { animation: punto 1s infinite; }
-  .scrive span:nth-child(2) { animation-delay: .15s; }
-  .scrive span:nth-child(3) { animation-delay: .3s; }
-}
-@keyframes punto { 50% { opacity: .3; } }
-
-.suggerimenti { display: flex; gap: 8px; padding: 0 16px 12px; overflow-x: auto; scrollbar-width: none; }
-.chip {
-  height: 44px;
-  padding: 12px;
-  border: 1.5px solid var(--primary-100);
-  border-radius: var(--radius-round);
-  color: var(--primary-100);
-  font: var(--body-2);
-  white-space: nowrap;
-}
-.chip:hover { background: var(--primary-10); }
-
-.form { display: flex; gap: 8px; padding: 12px 16px 16px; background: var(--neutral-10); }
-.input {
-  flex: 1;
-  min-width: 0;
-  height: 44px;
-  padding: 0 16px;
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-round);
-  background: var(--bg-neutral-secondary);
-  font: var(--body-2);
-}
-.invia {
+.avatarPiccolo { width: 40px; height: 40px; }
+.avatarPiccolo img { width: 24px; height: 24px; object-fit: contain; }
+.headTesti { flex: 1; min-width: 0; }
+.titolo { font: var(--subh3); line-height: 1.2; }
+.sottotitolo { font: 400 13px/1.4 var(--font-body); color: var(--text-secondary); }
+.chiudi {
   flex: none;
   display: grid;
   place-items: center;
   width: 44px;
   height: 44px;
-  border-radius: 100px;
-  background: var(--primary-90);
+  border-radius: 50%;
+  background: var(--bg-grey);
+  color: var(--text-secondary);
+  transition: background .15s, scale .15s;
 }
-.invia:hover { background: var(--primary-100); }
+.chiudi:active { scale: .92; }
+@media (hover: hover) {
+  .chiudi:hover { background: var(--neutral-30); color: var(--text-primary); }
+}
+
+/* ── Conversazione ─────────────────────────────────────────────── */
+.log {
+  flex: 1;
+  min-height: 120px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 16px 12px;
+}
+
+.benvenuto {
+  margin-block: auto; /* da solo sta al centro; con altri messaggi scorre via */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 12px 8px;
+  text-align: center;
+}
+.avatarGrande { width: 88px; height: 88px; margin-bottom: 6px; }
+.avatarGrande img { width: 48px; height: 48px; object-fit: contain; }
+.benvenutoTitolo { font: var(--subh2); line-height: 1.2; max-width: 18ch; text-wrap: balance; }
+.benvenutoTesto { max-width: 32ch; font: 400 15px/1.5 var(--font-body); color: var(--text-secondary); text-wrap: pretty; }
+
+.turnoUtente { display: flex; justify-content: flex-end; }
+.bolla {
+  max-width: 80%;
+  padding: 10px 14px;
+  border-radius: 20px 20px 6px 20px;
+  background: var(--primary-90);
+  color: var(--neutral-10);
+  font: 400 15px/1.45 var(--font-body);
+  overflow-wrap: anywhere;
+}
+
+/* Libby parla senza bolla, come una libraia accanto a te: i protagonisti sono i libri */
+.turnoLibby { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 10px; align-items: start; }
+.avatarMini { width: 28px; height: 28px; }
+.avatarMini img { width: 16px; height: 16px; object-fit: contain; }
+.risposta { display: flex; flex-direction: column; gap: 12px; padding-top: 3px; font: 400 15px/1.5 var(--font-body); }
+.risposta > p { max-width: 60ch; text-wrap: pretty; }
+
+/* Card libro: stesso linguaggio delle card in homepage, compattato */
+.libri { display: flex; flex-direction: column; gap: 10px; }
+.libro {
+  position: relative;
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px;
+  border-radius: var(--radius-l);
+  background: var(--neutral-10);
+  box-shadow: var(--shadow-sospensione);
+  transition: box-shadow .2s, scale .15s;
+}
+.libro:has(.libroTitolo a:active) { scale: .985; }
+@media (hover: hover) {
+  .libro:hover { box-shadow: var(--shadow-200); }
+}
+.copertina {
+  width: 64px;
+  height: 98px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .18)); /* segue il bordo reale della copertina */
+}
+.libroInfo { display: flex; flex-direction: column; min-width: 0; }
+.stato {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: var(--body-1-bold);
+  color: var(--secondary-70); /* l'arancio del badge, tono scuro per il contrasto a 12px */
+}
+.stato::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: currentColor; }
+.libroTitolo {
+  margin-top: 4px;
+  font: 600 15px/1.35 var(--font-body);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+/* Tutta la card è toccabile tramite il link del titolo */
+.libroTitolo a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.libroAutore { font: 400 13px/1.4 var(--font-body); color: var(--text-secondary); }
+.perche { margin-top: 6px; font: 400 14px/1.45 var(--font-body); }
+.libroPiede { margin-top: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.prezzi { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 8px; }
+.prezzo { font: 600 16px/1.2 var(--font-body); color: var(--primary-90); font-variant-numeric: tabular-nums; }
+.vecchio { font: 400 13px/1.2 var(--font-body); color: var(--text-secondary); }
+.sconto {
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: var(--accent-30);
+  color: var(--primary-100);
+  font: var(--body-1-bold);
+  white-space: nowrap;
+}
+.carrello {
+  position: relative;
+  z-index: 1; /* sopra il link della card */
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary-90);
+  color: var(--neutral-10);
+  transition: background .2s, scale .15s;
+}
+.carrello:active { scale: .92; }
+.aggiunto { background: var(--primary-100); }
+@media (hover: hover) {
+  .carrello:hover { background: var(--primary-100); }
+}
+
+/* Libby sta cercando */
+.cerca {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 20px 20px 20px 6px;
+  background: var(--neutral-10);
+  box-shadow: var(--shadow-sospensione);
+  font: 400 14px/1.4 var(--font-body);
+  color: var(--text-secondary);
+}
+.puntini { display: inline-flex; gap: 4px; }
+.puntini i { width: 6px; height: 6px; border-radius: 50%; background: var(--neutral-40); }
+
+/* ── Piede: risposte rapide + barra di scrittura ───────────────── */
+.piede {
+  flex: none;
+  padding: 8px 0 calc(10px + env(safe-area-inset-bottom));
+  background: var(--neutral-10);
+  border-top: 1px solid var(--bg-grey);
+}
+.panel[data-tastiera] .piede { padding-bottom: 10px; } /* con la tastiera aperta la barra home è coperta */
+.rapide {
+  display: flex;
+  gap: 8px;
+  padding: 4px 16px 10px;
+  overflow-x: auto;
+  scroll-padding-inline: 16px;
+  scrollbar-width: none;
+}
+.rapide::-webkit-scrollbar { display: none; }
+.rapida {
+  height: 44px;
+  padding: 0 16px;
+  border: 1.5px solid var(--primary-100);
+  border-radius: var(--radius-round);
+  background: var(--neutral-10);
+  color: var(--primary-100);
+  font: 400 15px/1 var(--font-body);
+  white-space: nowrap;
+  transition: background .15s, scale .15s, opacity .2s;
+}
+.rapida:active { scale: .96; background: var(--primary-10); }
+.rapida[aria-disabled] { opacity: .45; cursor: default; }
+@media (hover: hover) {
+  .rapida:not([aria-disabled]):hover { background: var(--primary-10); }
+}
+.form { display: flex; align-items: center; gap: 8px; padding: 0 12px 0 16px; }
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 48px;
+  padding: 0 18px;
+  border: 1px solid var(--neutral-40);
+  border-radius: 24px;
+  background: var(--neutral-10);
+  color: var(--text-primary);
+  font: 400 16px/1 var(--font-body); /* 16px: iOS non zooma sul campo */
+}
+.input::placeholder { color: var(--text-secondary); opacity: 1; }
+.panel .input:focus-visible { outline-offset: 1px; border-color: transparent; }
+.invia {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--primary-90);
+  color: var(--neutral-10);
+  transition: background .2s, color .2s, scale .15s;
+}
+.invia[aria-disabled] { background: var(--neutral-30); color: var(--text-secondary); cursor: default; }
+.invia:not([aria-disabled]):active { scale: .92; }
+@media (hover: hover) {
+  .invia:not([aria-disabled]):hover { background: var(--primary-100); }
+}
+
+/* ── Movimento: comunica l'arrivo di contenuti nuovi, mai decorativo ── */
+@media (prefers-reduced-motion: no-preference) {
+  .benvenuto, .turnoUtente, .turnoLibby { animation: entra .28s var(--ease-out) backwards; }
+  .libro { animation: entra .32s var(--ease-out) backwards; animation-delay: calc(var(--i, 0) * 60ms + 80ms); }
+  .aggiunto svg { animation: spunta .3s var(--ease-out); }
+  .puntini i { animation: respiro 1.2s ease-in-out infinite; }
+  .puntini i:nth-child(2) { animation-delay: .15s; }
+  .puntini i:nth-child(3) { animation-delay: .3s; }
+}
+@keyframes entra { from { opacity: 0; translate: 0 8px; } }
+@keyframes spunta { from { opacity: 0; scale: .5; } }
+@keyframes respiro { 0%, 80%, 100% { opacity: .35; } 40% { opacity: 1; translate: 0 -2px; } }

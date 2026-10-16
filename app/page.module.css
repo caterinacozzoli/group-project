@@ -16,3 +16,13 @@
 @media (min-width: 768px) {
   .pagina { padding-top: 24px; }
 }
+
+/* Telefono vero: niente status bar finta, la pagina rispetta notch, Dynamic Island e barra home */
+@media (pointer: coarse) and (max-width: 767px) {
+  .pagina {
+    padding-top: calc(env(safe-area-inset-top) + 12px);
+    padding-left: max(var(--gutter), env(safe-area-inset-left));
+    padding-right: max(var(--gutter), env(safe-area-inset-right));
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}

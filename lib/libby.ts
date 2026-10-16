@@ -7,6 +7,7 @@ export type Libro = {
   titolo: string;
   autore: string;
   stato: string;
+  etichetta: string;
   prezzo: string;
   prezzoVecchio: string | null;
   sconto: string;
@@ -57,9 +58,10 @@ const MOOD: Record<string, RegExp> = {
 };
 
 const GENERE_FRASE: Record<string, string> = {
-  gialli: "un giallo", "romanzi rosa": "una storia romantica", fantascienza: "un romanzo di fantascienza",
+  // Tutti maschili: i mood sono aggettivi maschili e devono concordare
+  gialli: "un giallo", "romanzi rosa": "un romanzo rosa", fantascienza: "un romanzo di fantascienza",
   classici: "un classico", storico: "un romanzo storico", ragazzi: "un libro per ragazzi",
-  "young adult": "un young adult", saggistica: "un saggio", horror: "un horror", poesia: "una raccolta di poesie",
+  "young adult": "un young adult", saggistica: "un saggio", horror: "un horror", poesia: "un libro di poesie",
   umorismo: "un libro che fa ridere", "crescita personale": "un libro di crescita personale", narrativa: "un romanzo",
 };
 
@@ -164,16 +166,17 @@ export function rispondi(testoGrezzo: string, ctx: Contesto): Risposta {
   const consigli = scelti.map(({ l }) => {
     const g = l.generi.find((x) => generi.includes(x)) ?? l.generi[0];
     const vicini = mood.flatMap((x) => VICINI[x] ?? []);
-    const m = l.mood.find((x) => mood.includes(x) && !moodUsati.has(x))
-      ?? l.mood.find((x) => vicini.includes(x))
-      ?? l.mood.find((x) => !moodUsati.has(x)) ?? l.mood[0];
-    moodUsati.add(m);
+    const ripete = (x: string) => g === "romanzi rosa" && x === "romantico";
+    const m = l.mood.filter((x) => !ripete(x)).find((x) => mood.includes(x) && !moodUsati.has(x))
+      ?? l.mood.find((x) => vicini.includes(x) && !ripete(x))
+      ?? l.mood.find((x) => !moodUsati.has(x) && !ripete(x)) ?? l.mood.find((x) => !ripete(x));
+    if (m) moodUsati.add(m);
     const attacco = g === generePrima ? "Anche questo è" : "È";
     generePrima = g;
     const nelleCorde = usaProfilo && l.generi.some((x) => profilo!.generiPreferiti.includes(x));
     return {
       libro: l,
-      perche: `${attacco} ${GENERE_FRASE[g]} ${MOOD_FRASE[m]}${nelleCorde ? ", proprio nelle tue corde" : ""}.`,
+      perche: `${attacco} ${GENERE_FRASE[g]}${m ? ` ${MOOD_FRASE[m]}` : ""}${nelleCorde ? ", proprio nelle tue corde" : ""}.`,
       promo: promo(l),
     };
   });
