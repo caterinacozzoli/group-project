@@ -263,7 +263,7 @@ const SLIDES: Slide[] = [
             <Voce etichetta="Spazio" titolo="Prompt maker" piu="prompt-maker">Un Progetto di Claude: istruzioni fisse e file di contesto</Voce>
             <Voce etichetta="Istruzioni" titolo="Prompt designer" piu="pm-istruzioni">Trasforma richieste brevi o disordinate in prompt pronti</Voce>
             <Voce etichetta="Knowledge base" titolo="Le regole" piu="pm-kb">Obiettivo reale, dati mancanti, verifica prima di consegnare</Voce>
-            <Voce etichetta="Output" titolo="Handoff">
+            <Voce etichetta="Output" titolo="Handoff" piu="brief">
               <code>BRIEF.md</code>, <code>libby-anima.md</code>, <code>PROMPT-ANTIGRAVITY.md</code>
             </Voce>
           </div>
@@ -573,7 +573,7 @@ const SLIDES: Slide[] = [
     corpo: (
       <>
         <div className={s.righe}>
-          <Voce titolo="Anima">
+          <Voce titolo="Anima" piu="anima">
             <code>libby-anima.md</code>: tono, regole e limiti (al massimo 3 libri, mai titoli inventati)
           </Voce>
           <Voce titolo="Motore">Regole locali che seguono l&apos;anima, senza API</Voce>

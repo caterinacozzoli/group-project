@@ -382,7 +382,7 @@
 .pannello {
   position: fixed;
   inset: 0 0 0 auto;
-  width: min(560px, 100vw);
+  width: min(640px, 100%);
   max-width: 100vw;
   height: 100dvh;
   max-height: 100dvh;
@@ -411,6 +411,10 @@
 .pannelloTitolo {
   margin-bottom: 8px;
   font: 400 36px / 1.15 var(--titoli);
+}
+.pannelloSotto {
+  margin-top: 12px;
+  font: 400 24px / 1.2 var(--titoli);
 }
 .pannello ol {
   display: grid;

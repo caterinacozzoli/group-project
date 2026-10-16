@@ -4,7 +4,12 @@ import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from "re
 import { asset } from "@/lib/asset";
 import s from "./presentazione.module.css";
 
-type Blocco = string | { passi: string[] } | { codice: string } | { immagine: string; alt: string; w: number; h: number };
+type Blocco =
+  | string
+  | { sottotitolo: string }
+  | { passi: string[] }
+  | { codice: string }
+  | { immagine: string; alt: string; w: number; h: number };
 export type Approfondimento = { titolo: string; contenuto: Blocco[]; link?: { testo: string; url: string }[] };
 export type Slide = { titolo: string; fase?: string; sintesi?: string; corpo?: ReactNode; layout?: string };
 
@@ -157,6 +162,8 @@ export default function Deck({
               {a.contenuto.map((b, k) =>
                 typeof b === "string" ? (
                   <p key={k}>{testo(b)}</p>
+                ) : "sottotitolo" in b ? (
+                  <h3 key={k} className={s.pannelloSotto}>{b.sottotitolo}</h3>
                 ) : "passi" in b ? (
                   <ol key={k}>{b.passi.map((p, j) => <li key={j}>{testo(p)}</li>)}</ol>
                 ) : "immagine" in b ? (

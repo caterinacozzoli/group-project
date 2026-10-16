@@ -5,6 +5,8 @@ Presentazione: https://caterinacozzoli.github.io/group-project/presentazione/
 Come si legge
 - Tre blocchi, uno per oratore. Ognuno parla per il suo blocco, poi passa la parola.
 - [+ nome] = approfondimento facoltativo: si apre col "+" solo se c'è tempo o se qualcuno lo chiede.
+  Gli approfondimenti sono scritti come guide: comandi e passi per rifare il workflow o costruirne uno proprio.
+  Si possono lasciare da leggere dopo, sul link della presentazione.
 - Tasti: frecce per avanzare, F per lo schermo intero, Esc chiude un approfondimento.
 - Tono: raccontiamo il workflow che abbiamo costruito insieme, ci fermiamo solo sulle cose meno ovvie.
 
@@ -42,7 +44,7 @@ Le istruzioni gli dicono di comportarsi da prompt designer: prende richieste bre
 La knowledge base contiene le regole: capire l'obiettivo reale, trovare i dati mancanti, verificare prima di consegnare.
 Da qui sono usciti i file di handoff: il brief, l'anima di Libby e il prompt di avvio per Antigravity.
 Cosa abbiamo imparato: le decisioni non devono restare nella memoria di una chat. Messe in file, si rileggono, si versionano e si passano a un altro agente o a un collega.
-[+ Istruzioni] [+ Knowledge base]
+[+ Istruzioni] [+ Knowledge base] [+ Handoff: il brief]
 
 SLIDE 5 · La cartella di progetto
 A sinistra, in alto, la cartella com'era all'inizio: file sparsi, un README, l'anima di Libby, l'architettura delle informazioni, gli stili e le variabili.
@@ -118,13 +120,13 @@ Il motore sono regole locali che seguono quell'anima, senza API.
 L'interfaccia è a tutto schermo sul telefono e a pannello su desktop. Qui, e solo qui, abbiamo usato le skill di design.
 Cosa abbiamo imparato, senza API: zero costi, nessuna chiave nel repository pubblico, risposte prevedibili e testabili. Domani si collega a un modello AI vero, con la stessa interfaccia.
 Cosa abbiamo imparato, le skill solo qui: la homepage è il Figma e non si tocca. La libertà di design va dove aggiunge valore.
-[+ La chat] [+ Il carattere di Libby]
+[+ Anima] [+ La chat] [+ Il carattere di Libby]
 
 SLIDE 13 · La verifica
 L'agente controlla da solo quello che ha fatto. Con Playwright apre il sito, simula un iPhone, clicca, scrive, fotografa e confronta con il Figma. Lo screenshot che vedete l'ha fatto lui.
 Gli accessibility agents controllano alt text, tastiera, screen reader e contrasti.
 Cosa abbiamo imparato: la verifica è veloce e ripetibile. E l'accessibilità si controlla mentre si scrive: un hook, cioè una regola che Claude Code esegue da solo, ferma i file dell'interfaccia finché non passano la revisione.
-[+ Cos'è un hook]
+[+ Cos'è un hook] [+ Playwright] [+ Accessibility agents]
 
 SLIDE 14 · Dal locale alla condivisione
 Una cosa che si dà per scontata: vederlo sul nostro computer non vuol dire averlo pubblicato. Con npm run dev il sito gira su localhost, e lo vediamo solo noi.
