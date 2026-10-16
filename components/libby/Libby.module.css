@@ -5,11 +5,11 @@
   right: 16px;
   bottom: 16px;
   z-index: 10;
-  width: 64px;
-  height: 64px;
+  width: 76px;
+  height: 76px;
   border-radius: 50%;
   overflow: hidden;
-  padding: 10px;
+  padding: 12px;
   background: var(--neutral-10);
   box-shadow: var(--shadow-200);
 }

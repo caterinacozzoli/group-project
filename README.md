@@ -2,6 +2,8 @@
 
 Homepage "Offerte e Outlet" (Figma `2294:25887`) in Next.js 16, con Libby, la libraia digitale (motore locale, senza API).
 
+**Prototipo online:** https://caterinacozzoli.github.io/group-project/ (si aggiorna a ogni push su `main`).
+
 ```bash
 npm install
 npm run dev          # http://localhost:3000

@@ -1,4 +1,5 @@
 import styles from "./Button.module.css";
+import { asset } from "@/lib/asset";
 
 type Props = { href: string; children: string; freccia?: boolean; className?: string; describedBy?: string };
 
@@ -7,7 +8,7 @@ export default function Button({ href, children, freccia, className = "", descri
   return (
     <a href={href} className={`${styles.btn} ${className}`} aria-describedby={describedBy}>
       {children}
-      {freccia && <img src="/assets/icons/arrow-right-white.svg" alt="" width={24} height={24} />}
+      {freccia && <img src={asset("/assets/icons/arrow-right-white.svg")} alt="" width={24} height={24} />}
     </a>
   );
 }

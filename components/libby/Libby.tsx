@@ -6,6 +6,7 @@ import books from "@/data/books.json";
 import user from "@/data/user.json";
 import { rispondi, type Risposta } from "@/lib/libby";
 import styles from "./Libby.module.css";
+import { asset } from "@/lib/asset";
 
 type Msg = { id: number; da: "utente" | "libby"; testo?: string; risposta?: Risposta };
 
@@ -70,12 +71,12 @@ export default function Libby() {
         aria-controls="libby-panel"
         onClick={apri}
       >
-        <img src="/assets/brand/libby.svg" alt="" width={64} height={64} />
+        <img src={asset("/assets/brand/libby.svg")} alt="" width={76} height={76} />
       </button>
 
       <dialog id="libby-panel" ref={dialog} className={styles.panel} aria-labelledby="libby-titolo" onClose={() => setAperta(false)}>
         <header className={styles.head}>
-          <img className={styles.avatar} src="/assets/brand/libby.svg" alt="" width={44} height={44} />
+          <img className={styles.avatar} src={asset("/assets/brand/libby.svg")} alt="" width={44} height={44} />
           <div className={styles.headTesti}>
             <h2 id="libby-titolo" className={styles.titolo}>Libby</h2>
             <p className={styles.sottotitolo}>la tua libraia digitale</p>
@@ -118,7 +119,7 @@ export default function Libby() {
             autoComplete="off"
           />
           <button type="submit" className={styles.invia} aria-label="Invia">
-            <img src="/assets/icons/arrow-right-white.svg" alt="" width={24} height={24} />
+            <img src={asset("/assets/icons/arrow-right-white.svg")} alt="" width={24} height={24} />
           </button>
         </form>
       </dialog>
@@ -134,7 +135,7 @@ function RispostaLibby({ r }: { r: Risposta }) {
         <ul role="list" className={styles.consigli}>
           {r.consigli.map(({ libro, perche, promo }) => (
             <li key={libro.id} className={styles.consiglio}>
-              <Image src={libro.copertina} alt="" width={48} height={74} />
+              <Image src={asset(libro.copertina)} alt="" width={48} height={74} />
               <div>
                 <p className={styles.libroTitolo}><a href="#">{libro.titolo}</a></p>
                 <p className={styles.libroAutore}>{libro.autore}</p>

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import styles from "./Carousel.module.css";
+import { asset } from "@/lib/asset";
 
 type Props = { id: string; children: ReactNode[]; gap?: number };
 
@@ -37,10 +38,10 @@ export default function Carousel({ id, children, gap = 16 }: Props) {
         {children.map((child, i) => <li key={i} className={styles.item}>{child}</li>)}
       </ul>
       <button type="button" className={`${styles.freccia} ${styles.prev}`} aria-label="Precedenti" aria-controls={id} disabled={inizio} onClick={() => scorri(-1)}>
-        <img src="/assets/icons/arrow-right.svg" alt="" width={24} height={24} />
+        <img src={asset("/assets/icons/arrow-right.svg")} alt="" width={24} height={24} />
       </button>
       <button type="button" className={`${styles.freccia} ${styles.next}`} aria-label="Successivi" aria-controls={id} disabled={fine} onClick={() => scorri(1)}>
-        <img src="/assets/icons/arrow-right.svg" alt="" width={24} height={24} />
+        <img src={asset("/assets/icons/arrow-right.svg")} alt="" width={24} height={24} />
       </button>
     </div>
   );

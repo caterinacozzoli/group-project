@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type books from "@/data/books.json";
 import styles from "./CardLibro.module.css";
+import { asset } from "@/lib/asset";
 
 export type Libro = (typeof books.libri)[number];
 
@@ -12,7 +13,7 @@ export default function CardLibro({ libro }: { libro: Libro }) {
         {libro.rarita && <p className={styles.rarita}>{libro.rarita.toUpperCase()}</p>}
       </div>
       <div className={styles.copertina}>
-        <Image src={libro.copertina} alt="" width={129} height={198} sizes="129px" />
+        <Image src={asset(libro.copertina)} alt="" width={129} height={198} sizes="129px" />
       </div>
       <div className={styles.info}>
         <div className={styles.testi}>
@@ -26,7 +27,7 @@ export default function CardLibro({ libro }: { libro: Libro }) {
           </p>
         </div>
         <button type="button" className={styles.carrello} aria-label={`Aggiungi al carrello: ${libro.titolo}`}>
-          <img src="/assets/icons/bag-white.svg" alt="" width={24} height={24} />
+          <img src={asset("/assets/icons/bag-white.svg")} alt="" width={24} height={24} />
         </button>
       </div>
       <p className={styles.sconto}>{libro.sconto}</p>

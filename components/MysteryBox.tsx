@@ -2,11 +2,12 @@ import Image from "next/image";
 import type promos from "@/data/promos.json";
 import Button from "./Button";
 import styles from "./MysteryBox.module.css";
+import { asset } from "@/lib/asset";
 
 export default function MysteryBox({ box }: { box: (typeof promos)["mysteryBox"] }) {
   return (
     <article className={styles.card}>
-      <Image className={styles.img} src={box.immagine} alt="" width={361} height={268} sizes="(min-width: 768px) 720px, 100vw" />
+      <Image className={styles.img} src={asset(box.immagine)} alt="" width={361} height={268} sizes="(min-width: 768px) 720px, 100vw" />
       <div className={styles.barra}>
         <div>
           <h3 id="mystery-titolo" className={styles.titolo}>{box.titolo}</h3>
