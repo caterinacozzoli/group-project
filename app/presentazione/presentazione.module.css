@@ -1,0 +1,892 @@
+/* Presentazione, stile delle slide Figma (frame 1:145, 1:98, 1:39, 1:2).
+   Mobile first: slide impilate. Da 1024 × 540 px: tela 1920 × 1080 scalata, una slide alla volta. */
+
+.deck {
+  --nero: #171717;
+  --grigio: #555555; /* circa 7:1 su bianco */
+  --linea: #d7d7d7;
+  --titoli: var(--font-orbit), system-ui, sans-serif;
+  --sans: var(--font-inter), system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  --t-etichetta: 13px;
+  --t-dettaglio: 15px;
+  --t-testo: 17px;
+  --t-voce: 22px;
+  --t-titolo: 34px;
+  --k: 1;
+
+  min-height: 100dvh;
+  background: #fff;
+  color: var(--nero);
+  font: 400 var(--t-testo) / 1.45 var(--sans);
+}
+
+.deck :focus-visible {
+  outline: 3px solid var(--nero);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+/* Dentro la tela scalata l'anello si rimpicciolisce: lo compenso */
+.tela :focus-visible {
+  outline-width: max(3px, calc(3px / var(--k)));
+  outline-offset: calc(4px / var(--k));
+}
+/* Focus spostato via codice sulla slide: niente anello attorno a tutta la pagina */
+.deck .slide:focus-visible {
+  outline: none;
+}
+
+.deck code {
+  font-family: var(--mono);
+  font-size: 0.85em;
+}
+
+.testata,
+.fase {
+  font-size: var(--t-etichetta);
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.testata {
+  padding: 16px;
+  color: var(--grigio);
+}
+.fase {
+  margin-top: 10px;
+}
+
+.slide {
+  padding: 40px 16px 56px;
+  border-top: 1px solid var(--linea);
+}
+
+.tratto {
+  display: block;
+  width: 40px;
+  height: 2px;
+  margin-bottom: 16px;
+  background: var(--nero);
+}
+
+.titolo {
+  font: 400 var(--t-titolo) / 1.1 var(--titoli);
+}
+
+.sintesi {
+  margin-top: 12px;
+  color: var(--grigio);
+}
+
+.corpo {
+  display: grid;
+  gap: 32px;
+  margin-top: 32px;
+}
+
+.pila {
+  display: grid;
+  gap: 24px;
+  align-content: start;
+}
+
+/* ── Voci ── */
+
+.voce {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+.voce > .etichetta {
+  order: -2;
+}
+.simbolo {
+  order: -1;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+}
+.icona {
+  flex: none;
+  width: 40px;
+  height: 40px;
+}
+
+.etichetta {
+  font-size: var(--t-etichetta);
+  font-weight: 400;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--grigio);
+}
+.etichetta code {
+  text-transform: none;
+}
+
+.voceTitolo {
+  font: 400 var(--t-voce) / 1.15 var(--titoli);
+}
+
+.descrizione {
+  color: var(--grigio);
+}
+
+.dettaglio {
+  font-size: var(--t-dettaglio);
+  line-height: 1.5;
+  color: var(--grigio);
+}
+
+.colonne {
+  display: grid;
+  gap: 24px;
+}
+
+.righe {
+  display: grid;
+}
+.righe .voce {
+  display: grid;
+  gap: 4px;
+  padding: 16px 0;
+  border-top: 1px solid var(--linea);
+}
+.righe .voce:last-child {
+  border-bottom: 1px solid var(--linea);
+}
+
+/* Frecce tratteggiate (solo sulla tela) */
+.freccia {
+  display: none;
+}
+
+/* ── Il "+" dell'approfondimento ── */
+
+.piu {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  text-align: left;
+  cursor: pointer;
+  /* area di tocco più alta senza spostare il testo */
+  padding-block: 12px;
+  margin-block: -12px;
+}
+.segno {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin-left: 10px;
+  border: 1px solid var(--grigio);
+  border-radius: 50%;
+  color: var(--grigio);
+  font: 300 22px / 1 var(--sans);
+  vertical-align: middle;
+  transition: background-color 0.15s, color 0.15s;
+}
+.piu:hover .segno {
+  background: var(--nero);
+  border-color: var(--nero);
+  color: #fff;
+}
+
+/* ── Riquadri ── */
+
+.perche {
+  display: grid;
+  gap: 8px;
+  padding: 20px;
+  border: 1px solid var(--linea);
+}
+
+/* Loghi monocromi: neri come il testo */
+.logo {
+  flex: none;
+  width: auto;
+  height: 36px;
+}
+.parola {
+  width: auto;
+  height: 14px;
+}
+.loghi {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 32px;
+  color: var(--grigio);
+}
+.loghi li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.loghi .logo {
+  height: 28px;
+}
+/* Alto contrasto scuro: le immagini non si ricolorano, i loghi neri sparirebbero */
+@media (forced-colors: active) {
+  .logo,
+  .parola {
+    forced-color-adjust: none;
+    background: #fff;
+    border-radius: 2px;
+  }
+}
+
+.domande ol {
+  display: grid;
+}
+.domande li {
+  display: grid;
+  gap: 4px;
+  padding: 14px 0;
+  border-top: 1px solid var(--linea);
+}
+.domande li:last-child {
+  border-bottom: 1px solid var(--linea);
+}
+.domande figcaption {
+  margin-top: 12px;
+}
+.risposta {
+  color: var(--grigio);
+}
+
+.foto {
+  display: grid;
+  justify-items: start;
+  gap: 10px;
+}
+.foto img,
+.pannello img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--linea);
+}
+.telefono img {
+  width: min(280px, 100%);
+  aspect-ratio: 393 / 852;
+  object-fit: cover;
+}
+
+.avatar {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+  vertical-align: middle;
+}
+
+.albero {
+  font: 400 var(--t-dettaglio) / 1.7 var(--mono);
+  white-space: pre-wrap;
+}
+.albero > span {
+  display: block;
+}
+.nota {
+  display: block;
+  padding-left: 4ch;
+  color: var(--grigio);
+}
+
+.tabella {
+  width: 100%;
+  border-collapse: collapse;
+}
+.tabella {
+  hyphens: auto;
+}
+.tabella th,
+.tabella td {
+  padding: 10px 10px 10px 0;
+  border-top: 1px solid var(--linea);
+  font-weight: 400;
+  text-align: left;
+  vertical-align: baseline;
+}
+.tabella thead th {
+  padding-top: 0;
+  border-top: 0;
+  font-size: var(--t-etichetta);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--grigio);
+}
+.tabella tbody th {
+  font: 400 var(--t-voce) / 1.15 var(--titoli);
+}
+.tabella td {
+  font-size: var(--t-dettaglio);
+  color: var(--grigio);
+}
+.tabella tbody tr:last-child > * {
+  border-bottom: 1px solid var(--linea);
+}
+
+.citazione blockquote {
+  margin: 0;
+  font: 400 calc(var(--t-voce) * 1.3) / 1.3 var(--titoli);
+}
+.citazione figcaption {
+  margin-top: 16px;
+}
+
+.qr {
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+}
+.qr img {
+  width: min(280px, 100%);
+  height: auto;
+  image-rendering: pixelated;
+}
+
+.qr a,
+.link a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.passi {
+  display: grid;
+  gap: 20px;
+  padding-left: 1.4em;
+  list-style: decimal;
+}
+.passi li::marker {
+  color: var(--grigio);
+}
+
+.messaggio {
+  font: 400 calc(var(--t-titolo) * 0.9) / 1.15 var(--titoli);
+}
+
+.copertina .titolo {
+  font-size: calc(var(--t-titolo) * 1.25);
+}
+
+.nav {
+  display: none;
+}
+
+/* ── Pannello dell'approfondimento (px reali, fuori dalla tela) ── */
+
+.pannello {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(560px, 100vw);
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--linea);
+  background: #fff;
+  color: var(--nero);
+  font: 400 18px / 1.55 var(--sans);
+}
+.pannello::backdrop {
+  background: rgb(23 23 23 / 0.25);
+}
+.pannelloInterno {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+  height: 100%;
+  padding: 24px 32px 48px;
+  overflow-y: auto;
+}
+.pannello .etichetta {
+  font-size: 14px;
+}
+.pannelloTitolo {
+  margin-bottom: 8px;
+  font: 400 36px / 1.15 var(--titoli);
+}
+.pannello ol {
+  display: grid;
+  gap: 6px;
+  padding-left: 1.4em;
+  list-style: decimal;
+}
+.pannello pre {
+  padding: 16px;
+  border-radius: 4px;
+  background: #f4f4f4;
+  font: 14px / 1.5 var(--mono);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.pannello pre code {
+  font-size: inherit;
+}
+.chiudi {
+  justify-self: end;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 -10px 0 0;
+  border-radius: 50%;
+}
+.chiudi:hover {
+  background: #f2f2f2;
+}
+.chiudi svg,
+.nav svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.link {
+  display: grid;
+  gap: 10px;
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid var(--linea);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pannello[open] {
+    animation: entra 0.22s ease-out;
+  }
+  .pannello[open]::backdrop {
+    animation: appare 0.22s ease-out;
+  }
+}
+@keyframes entra {
+  from {
+    translate: 100% 0;
+  }
+}
+@keyframes appare {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ══ Tela 1920 × 1080 (stessa soglia di FLUSSO in Deck.tsx) ══ */
+
+@media (min-width: 1024px) and (min-height: 540px) {
+  .deck {
+    /* Leggibilità in proiezione (frame 1920): etichette 18, dettagli 20, descrizioni 24. Titoli come nel Figma. */
+    --t-etichetta: 18px;
+    --t-dettaglio: 20px;
+    --t-testo: 24px;
+    --t-voce: 31px;
+    --t-titolo: 64px;
+    /* ponytail: tan(atan2(a, b)) = a / b senza unità, così la scala della tela è solo CSS */
+    --k: min(tan(atan2(100vw, 1920px)), tan(atan2(100dvh, 1080px)));
+
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .tela {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1920px;
+    height: 1080px;
+    transform: translate(-50%, -50%) scale(var(--k));
+  }
+
+  .testata,
+  .fase {
+    position: absolute;
+    top: 52px;
+    margin: 0;
+    padding: 0;
+  }
+  .testata {
+    right: 72px;
+  }
+  .fase {
+    left: 72px;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: none;
+    padding: 121px 72px 0;
+    border: 0;
+    overflow: hidden;
+  }
+  .slide[data-attiva] {
+    display: block;
+  }
+
+  .tratto {
+    margin-bottom: 18px;
+  }
+
+  .corpo {
+    position: absolute;
+    top: 317px;
+    right: 72px;
+    bottom: 96px;
+    left: 72px;
+    gap: 48px;
+    align-content: start;
+    align-items: start;
+    margin: 0;
+  }
+
+  .voce {
+    gap: 16px;
+  }
+  .icona {
+    width: 52px;
+    height: 52px;
+  }
+  .simbolo {
+    height: 76px;
+  }
+  .descrizione {
+    max-width: 22em;
+  }
+
+  .colonne {
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 48px;
+  }
+
+  .righe .voce {
+    grid-template-columns: var(--col, 260px) 1fr;
+    align-items: baseline;
+    column-gap: 32px;
+    row-gap: 6px;
+    padding: 14px 0;
+  }
+  .righe .descrizione {
+    max-width: none;
+  }
+  .righe .conEtichetta > * {
+    grid-column: 2;
+  }
+  .righe .conEtichetta > .etichetta {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .freccia {
+    display: block;
+    position: relative;
+    flex: 1;
+    height: 1.3px;
+    margin: 0 8px 0 64px;
+    background: repeating-linear-gradient(90deg, var(--nero) 0 5px, transparent 0 12px);
+  }
+  .freccia::after,
+  .doppia::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    translate: 0 -50%;
+    background: var(--nero);
+  }
+  .freccia::after {
+    right: -8px;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+  }
+  .doppia {
+    margin-left: 40px;
+  }
+  .doppia::before {
+    left: -8px;
+    clip-path: polygon(100% 0, 0 50%, 100% 100%);
+  }
+  .su {
+    width: 1.3px;
+    height: 120px;
+    margin: 0 0 24px 26px;
+    background: repeating-linear-gradient(180deg, var(--nero) 0 5px, transparent 0 12px);
+  }
+  .su::after {
+    top: -8px;
+    right: auto;
+    left: 50%;
+    translate: -50% 0;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  }
+
+  .perche {
+    gap: 10px;
+    padding: 28px 32px;
+  }
+
+  /* Pieni, pesano più delle icone al tratto: un po' più piccoli */
+  .logo {
+    height: 44px;
+  }
+  .schermata img {
+    width: 100%;
+  }
+
+  .albero {
+    white-space: pre;
+  }
+  .nota {
+    display: inline;
+    padding: 0;
+  }
+
+  .tabella {
+    hyphens: manual;
+  }
+  .tabella th,
+  .tabella td {
+    padding: 16px 24px 16px 0;
+  }
+  .tabella td {
+    font-size: var(--t-testo);
+  }
+
+  .qr img {
+    width: 480px;
+  }
+
+  .telefono img {
+    width: auto;
+    height: 600px;
+  }
+
+  .coppia {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  /* Layout delle singole slide */
+
+  .slide.copertina {
+    padding-top: 380px;
+  }
+  .copertina .corpo {
+    top: auto;
+    bottom: 120px;
+  }
+  .loghi {
+    gap: 24px 56px;
+  }
+  .loghi .logo {
+    height: 40px;
+  }
+  .parola {
+    height: 20px;
+  }
+  .copertina .titolo {
+    max-width: 1500px;
+    font-size: 120px;
+    letter-spacing: -0.01em;
+  }
+  .copertina .sintesi {
+    margin-top: 32px;
+    font-size: 31px;
+  }
+
+  .contesto .corpo {
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 48px;
+    row-gap: 0;
+  }
+  .contesto .colonne {
+    grid-column: 1 / -1;
+  }
+  .contesto .settimana {
+    grid-column: 1;
+  }
+  /* Lo screenshot esce dal bordo basso, come nel Figma */
+  .contesto .foto {
+    position: absolute;
+    top: 341px;
+    left: 50%;
+    width: 294px;
+    height: 430px;
+    translate: -50% 0;
+    overflow: hidden;
+  }
+  .contesto .foto img {
+    width: 100%;
+    background: #fafafa;
+  }
+  .contesto .perche {
+    grid-column: 3 / -1;
+    justify-self: end;
+    width: 620px;
+    margin-top: 72px;
+  }
+
+  .fasi .corpo {
+    gap: 72px;
+  }
+  .fasi .perche {
+    max-width: 1100px;
+  }
+
+  .duo .corpo {
+    grid-template-columns: 1fr 680px;
+    column-gap: 96px;
+  }
+  .duo .telefono {
+    justify-self: center;
+  }
+  .verifica .righe {
+    --col: 380px;
+  }
+  .avvio .corpo {
+    grid-template-columns: 1fr 760px;
+  }
+  .avvio .citazione blockquote {
+    font-size: var(--t-voce);
+  }
+  .domande li {
+    padding: 16px 0;
+  }
+
+  .skill .corpo {
+    grid-template-columns: 1fr 560px;
+    column-gap: 96px;
+  }
+
+  .cartella .corpo {
+    grid-template-columns: 960px 1fr;
+    column-gap: 96px;
+  }
+  .cartella .righe {
+    --col: 220px;
+  }
+  .cartella .foto img {
+    width: 432px;
+  }
+
+  .trio .corpo {
+    grid-template-columns: 1fr 420px 640px;
+    column-gap: 56px;
+  }
+  .trio .righe {
+    --col: 240px;
+  }
+
+  .primaDopo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  /* Stesso ritaglio per prima e dopo: lo screenshot Figma copre solo l'inizio della pagina */
+  .primaDopo img {
+    width: auto;
+    height: 400px;
+    aspect-ratio: 584 / 840;
+    object-fit: cover;
+    object-position: top;
+  }
+  .primaDopo .freccia {
+    flex: 0 0 40px;
+    margin: 0 16px 0 0;
+  }
+
+  .ponte {
+    margin-bottom: 16px;
+  }
+  .ponte .voceTitolo {
+    white-space: nowrap;
+  }
+
+  .responsive .corpo {
+    grid-template-columns: 1fr 1fr 560px;
+    column-gap: 48px;
+  }
+  .responsive .colonne {
+    grid-column: 1 / -1;
+  }
+  .responsive .foto img {
+    width: 100%;
+  }
+
+  .pubblica .corpo {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 48px;
+    row-gap: 72px;
+  }
+  .pubblica .colonne {
+    grid-column: 1 / -1;
+  }
+
+  .demo .corpo {
+    grid-template-columns: 560px 1fr;
+    column-gap: 120px;
+  }
+  .demo .passi {
+    gap: 32px;
+  }
+
+  .chiusura .corpo {
+    gap: 96px;
+  }
+  .chiusura .passi {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, auto);
+    grid-auto-flow: column;
+    gap: 28px 120px;
+  }
+  .chiusura .descrizione {
+    max-width: none;
+  }
+  .chiusura .messaggio {
+    font-size: 64px;
+  }
+
+  /* Navigazione: px reali, in basso a destra */
+  .nav {
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    color: var(--grigio);
+    font: 400 15px / 1 var(--sans);
+    font-variant-numeric: tabular-nums;
+  }
+  .nav button {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    color: var(--nero);
+  }
+  .nav button:hover {
+    background: #f2f2f2;
+  }
+  .nav button[aria-disabled="true"] {
+    opacity: 0.3;
+    cursor: default;
+  }
+  .nav button[aria-disabled="true"]:hover {
+    background: none;
+  }
+  .contatore {
+    min-width: 4.5em;
+    text-align: center;
+  }
+}

@@ -1,0 +1,247 @@
+{
+  "antigravity": {
+    "titolo": "Antigravity e Claude Code",
+    "contenuto": [
+      "Antigravity è l'editor di codice di Google, costruito su VS Code, con agenti AI integrati. Nel suo terminale abbiamo usato Claude Code, l'agente di Anthropic.",
+      "Differenza con Claude Desktop: lì l'agente lavora in un ambiente cloud e vede solo le cartelle collegate. Non raggiunge i programmi in esecuzione sul Mac (per esempio il ponte di Figma su `localhost:38451`) e non può avviare il sito in locale per guardarlo."
+    ],
+    "link": [
+      { "testo": "Antigravity", "url": "https://antigravity.google" },
+      { "testo": "Claude Code", "url": "https://code.claude.com/docs/en/overview" }
+    ]
+  },
+  "prompt-maker": {
+    "titolo": "Lo spazio Prompt maker",
+    "contenuto": [
+      "Uno spazio (Progetto) di Claude conserva istruzioni e file di riferimento per tutte le conversazioni: in pratica funziona come una skill personale.",
+      "Dal prompt maker sono usciti il brief per Antigravity, il prompt per l'avatar e l'anima di Libby."
+    ],
+    "link": [
+      { "testo": "Cosa sono i Progetti di Claude", "url": "https://support.claude.com/en/articles/9517075-what-are-projects" }
+    ]
+  },
+  "pm-istruzioni": {
+    "titolo": "Le istruzioni del Prompt maker",
+    "contenuto": [
+      "«Agisci come un Prompt Designer senior specializzato in AI generativa. Il tuo compito è trasformare ogni mia richiesta in un prompt finale eccellente, pronto da usare.»",
+      "Per ogni richiesta ricostruisce il prompt con una struttura fissa: ruolo, contesto, compito.",
+      { "immagine": "/presentazione/pm-istruzioni.png", "alt": "Il pannello «Imposta le istruzioni del progetto» del Prompt maker, con obiettivo e metodo", "w": 684, "h": 484 }
+    ]
+  },
+  "pm-kb": {
+    "titolo": "La knowledge base",
+    "contenuto": [
+      "`KB_prompt maker.txt` raccoglie le regole per trasformare richieste vaghe in prompt chiari:",
+      { "passi": ["capire l'obiettivo reale;", "identificare i dati mancanti;", "chiedere chiarimenti solo se indispensabili;", "verificare la qualità prima di consegnare."] },
+      "«Un prompt efficace non è semplicemente più lungo. È più chiaro, più specifico, più strutturato.»",
+      { "immagine": "/presentazione/pm-kb.png", "alt": "L'inizio del file KB_prompt maker.txt: titolo, scopo e principio di base", "w": 948, "h": 548 }
+    ]
+  },
+  "architettura": {
+    "titolo": "L'architettura delle informazioni",
+    "contenuto": [
+      "La struttura del catalogo Libraccio.it: categorie principali, sottocategorie, filtri per autore, editore e prezzo. Nella cartella è `docs/architettura-informazioni.md`.",
+      "Accanto c'è `docs/design/tokens-estratti.css`, con le variabili del design.",
+      { "immagine": "/presentazione/docs-architettura.png", "alt": "Il documento dell'architettura: introduzione e le otto categorie principali, da Narrativa a Lingue", "w": 1168, "h": 940 }
+    ]
+  },
+  "variabili": {
+    "titolo": "Variabili e stili di testo",
+    "contenuto": [
+      "Arrivano per due strade, entrambe valide:",
+      {
+        "passi": [
+          "come file nella cartella: in quella di partenza c'erano già le variabili (JSON) e gli stili di testo (Markdown) dell'outlet;",
+          "letti dal Figma con MCP, direttamente da Antigravity."
+        ]
+      },
+      "Noi le abbiamo preparate in Claude Desktop con il connettore Figma (`tokens-estratti.css`) e completate in Antigravity con figma-ui-mcp, insieme agli elementi della pagina."
+    ]
+  },
+  "avatar": {
+    "titolo": "L'avatar di Libby",
+    "contenuto": [
+      "Generato con Meta AI, ritoccato, poi vettorializzato con Vizcom.",
+      "SVG: immagine vettoriale, nitida a ogni dimensione e leggera."
+    ],
+    "link": [
+      { "testo": "Meta AI", "url": "https://www.meta.ai" },
+      { "testo": "Vizcom", "url": "https://vizcom.com" }
+    ]
+  },
+  "figma-ui-mcp": {
+    "titolo": "Installare figma-ui-mcp",
+    "contenuto": [
+      "Installazione, dal README del progetto:",
+      {
+        "passi": [
+          "aggiungere il server a Claude Code;",
+          "riavviare l'editor;",
+          "scaricare `plugin.zip` e importare `manifest.json` in Figma desktop (la versione web non raggiunge il computer);",
+          "avviare il plugin: il pallino verde indica che è collegato."
+        ]
+      },
+      "In Antigravity lo stesso server si configura da \"Manage MCP Servers\" → `mcp_config.json`."
+    ],
+    "link": [
+      { "testo": "figma-ui-mcp su GitHub", "url": "https://github.com/TranHoaiHung/figma-ui-mcp" },
+      { "testo": "Model Context Protocol", "url": "https://modelcontextprotocol.io" },
+      { "testo": "MCP in Claude Code", "url": "https://code.claude.com/docs/en/mcp" }
+    ]
+  },
+  "mcp": {
+    "titolo": "Quando il ponte cade",
+    "contenuto": [
+      "`/mcp` nel terminale di Claude Code elenca i server MCP con il loro stato. Da lì si sceglie Reconnect; `/mcp reconnect all` riprova tutti quelli caduti.",
+      "A noi è successo più volte: due copie del server si contendevano la porta `38451` e il plugin restava su «Waiting for MCP server». La sequenza che funziona:",
+      {
+        "passi": [
+          "chiudere le copie del server rimaste aperte (lo chiediamo a Claude: «killa l'MCP»);",
+          "chiudere e riaprire il plugin in Figma;",
+          "`/mcp` → Reconnect su figma-ui-mcp."
+        ]
+      }
+    ],
+    "link": [{ "testo": "MCP in Claude Code", "url": "https://code.claude.com/docs/en/mcp" }]
+  },
+  "claude-code": {
+    "titolo": "Installare e aprire Claude Code",
+    "contenuto": [
+      "Si installa dal terminale (macOS e Linux):",
+      { "codice": "curl -fsSL https://claude.ai/install.sh | bash" },
+      "In alternativa `brew install --cask claude-code`. Serve un piano Claude a pagamento (Pro, Max, Team, Enterprise) o un account Console.",
+      "Poi si entra nella cartella del progetto e si avvia. Al primo avvio chiede il login dal browser:",
+      { "codice": "cd ~/Desktop/libby\nclaude" },
+      "C'è anche la versione con interfaccia: l'estensione Claude Code, che in Antigravity si installa cercando «Claude Code» tra le estensioni (registro Open VSX). È più comoda, ma passa in automatico anche il testo selezionato nell'editor: più contesto, quindi più token. Noi abbiamo usato il terminale."
+    ],
+    "link": [
+      { "testo": "Installare Claude Code", "url": "https://code.claude.com/docs/en/setup" },
+      { "testo": "L'estensione per VS Code e derivati", "url": "https://code.claude.com/docs/en/vs-code" },
+      { "testo": "Claude Code su Open VSX", "url": "https://open-vsx.org/extension/Anthropic/claude-code" }
+    ]
+  },
+  "caveman": {
+    "titolo": "Caveman",
+    "contenuto": [
+      "\"why use many token when few token do trick\".",
+      "Secondo il repo riduce i token di circa il 65%.",
+      { "immagine": "/presentazione/caveman-repo.png", "alt": "La pagina GitHub di caveman: descrizione, link alla documentazione e tag", "w": 472, "h": 604 }
+    ],
+    "link": [{ "testo": "Caveman su GitHub", "url": "https://github.com/JuliusBrussee/caveman" }]
+  },
+  "impeccable": {
+    "titolo": "Impeccable",
+    "contenuto": [
+      "\"The design language that makes your AI harness better at design.\"",
+      "Comandi come critique, polish e audit; file `PRODUCT.md` con personalità e principi del prodotto."
+    ],
+    "link": [{ "testo": "Impeccable su GitHub", "url": "https://github.com/pbakaus/impeccable" }]
+  },
+  "ui-ux-pro-max": {
+    "titolo": "UI/UX Pro Max",
+    "contenuto": [
+      "\"design intelligence for building professional UI/UX across multiple platforms\": stili, palette e regole UX (per esempio bottoni da almeno 44 px, margini per notch e barra home)."
+    ],
+    "link": [{ "testo": "UI/UX Pro Max su GitHub", "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill" }]
+  },
+  "playwright": {
+    "titolo": "Playwright",
+    "contenuto": ["Il server MCP di Microsoft, installato dal marketplace ufficiale di Anthropic."],
+    "link": [
+      { "testo": "Playwright MCP su GitHub", "url": "https://github.com/microsoft/playwright-mcp" },
+      { "testo": "Marketplace ufficiale di Anthropic", "url": "https://github.com/anthropics/claude-plugins-official" }
+    ]
+  },
+  "accessibility-agents": {
+    "titolo": "Accessibility agents",
+    "contenuto": [
+      "\"Eleven specialists that enforce WCAG 2.2 AA compliance so AI coding tools stop generating inaccessible code.\""
+    ],
+    "link": [{ "testo": "Accessibility agents su GitHub", "url": "https://github.com/community-access/accessibility-agents" }]
+  },
+  "plugin": {
+    "titolo": "Plugin e skill",
+    "contenuto": [
+      "Si installano dal terminale di Claude Code: prima il marketplace, poi il plugin.",
+      { "codice": "/plugin marketplace add <utente/repo>\n/plugin install" }
+    ],
+    "link": [
+      { "testo": "Guida ai plugin", "url": "https://code.claude.com/docs/en/plugins" },
+      { "testo": "Guida alle skill", "url": "https://code.claude.com/docs/en/skills" }
+    ]
+  },
+  "prompt-avvio": {
+    "titolo": "Il prompt di avvio",
+    "contenuto": [
+      "Il testo completo di `PROMPT-ANTIGRAVITY.md`:",
+      {
+        "codice": "Leggi `BRIEF.md` e i file in `docs/` e `companion/`: contengono tutte le decisioni già prese.\n\nPoi converti in un progetto Next.js (App Router, TypeScript, `tokens.css` + CSS Modules, Bitter/Poppins con `next/font`) la homepage Figma `2294:25887` del file `uAE3KllIWOwc9GiiqPU4D6`. Usa il bridge MCP figma-ui-mcp già attivo, non il connettore Figma ufficiale, che ha esaurito le chiamate.\n\n- Parti da `docs/design/tokens-estratti.css` per creare `styles/tokens.css`.\n- Leggi ogni sezione elencata al §3 del brief. Il design è mobile (393 px): riproducilo fedelmente, status bar inclusa, poi costruisci tablet e desktop con layout allargato.\n- I dati vanno in `data/*.json`. Le immagini che trovi in `asset/` vanno rinominate e smistate in `public/assets/` come da §6.\n- Copia il design paro paro: non attivare skill che ne cambiano l'aspetto. Usa solo la skill caveman per rispondermi in modo sintetico.\n- Il companion Libby (`companion/`) è la fase finale: per ora non va toccato.\n- Questa è solo la fase 1 (token + homepage). Il resto del UI kit lo facciamo dopo, una sezione per volta.\n- Prima di scrivere codice fammi le domande che ti servono. Alla fine dimmi come avviarlo ed elenca tutto ciò che hai dovuto ipotizzare."
+      },
+      "Le domande che Claude ha fatto prima di scrivere codice: export delle immagini, segnaposto, status bar, breakpoint."
+    ]
+  },
+  "stack": {
+    "titolo": "Lo stack",
+    "contenuto": [
+      "Stack: Next.js (App Router), TypeScript, CSS Modules.",
+      "Perché CSS Modules e token: i valori del Figma vengono copiati 1:1, senza un framework che li reinterpreta.",
+      "Posizioni verificate entro 1–3 px dal Figma."
+    ]
+  },
+  "anteprima": {
+    "titolo": "L'anteprima ⌘D",
+    "contenuto": [
+      "L'anteprima carica la pagina vera alla larghezza del dispositivo e la rimpicciolisce per farla stare nello schermo.",
+      "Al primo accesso un pop up spiega la scorciatoia."
+    ]
+  },
+  "pwa": {
+    "titolo": "Progressive Web App",
+    "contenuto": ["Una Progressive Web App è un sito che si installa sulla Home senza passare dallo store. Bastano un manifest e un'icona."],
+    "link": [{ "testo": "Imparare le PWA su web.dev", "url": "https://web.dev/learn/pwa" }]
+  },
+  "libby-chat": {
+    "titolo": "La chat di Libby",
+    "contenuto": ["Risposte rapide, card libro con carrello, trascina giù per chiudere."]
+  },
+  "libby-design": {
+    "titolo": "Il carattere di Libby",
+    "contenuto": [
+      "`PRODUCT.md`: personalità \"libraia di fiducia\". Da evitare il chatbot dell'assistenza clienti, l'AI generica e l'estetica infantile."
+    ]
+  },
+  "verifica-playwright": {
+    "titolo": "Playwright",
+    "contenuto": [],
+    "link": [
+      { "testo": "Playwright", "url": "https://playwright.dev" },
+      { "testo": "Playwright MCP su GitHub", "url": "https://github.com/microsoft/playwright-mcp" }
+    ]
+  },
+  "verifica-accessibilita": {
+    "titolo": "Accessibility agents",
+    "contenuto": [],
+    "link": [{ "testo": "Accessibility agents su GitHub", "url": "https://github.com/community-access/accessibility-agents" }]
+  },
+  "hook": {
+    "titolo": "Cos'è un hook",
+    "contenuto": [
+      "Una regola che Claude Code esegue da solo prima o dopo un'azione, senza che glielo si chieda ogni volta.",
+      "Qui: prima di scrivere un componente dell'interfaccia, Claude deve passare dalla revisione accessibilità. La prima volta ci ha chiesto come procedere e abbiamo scelto un revisore che non tocca l'aspetto: solo alt text, etichette, struttura e tastiera."
+    ],
+    "link": [{ "testo": "Gli hook in Claude Code", "url": "https://code.claude.com/docs/en/hooks" }]
+  },
+  "pubblicazione": {
+    "titolo": "La pubblicazione",
+    "contenuto": [
+      "Permessi del login: `repo` e `workflow` (il secondo serve per pubblicare con Actions).",
+      "Alternativa possibile: Vercel (non usato)."
+    ],
+    "link": [
+      { "testo": "gh auth login", "url": "https://cli.github.com/manual/gh_auth_login" },
+      { "testo": "GitHub Pages", "url": "https://docs.github.com/en/pages" },
+      { "testo": "Export statico Next.js", "url": "https://nextjs.org/docs/app/guides/static-exports" },
+      { "testo": "Repo del progetto", "url": "https://github.com/caterinacozzoli/group-project" }
+    ]
+  }
+}

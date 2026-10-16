@@ -1,0 +1,145 @@
+DA FIGMA AL PROTOTIPO CON ANTIGRAVITY
+Script per tre oratori · circa 30 minuti, demo compresa
+Presentazione: https://caterinacozzoli.github.io/group-project/presentazione/
+
+Come si legge
+- Tre blocchi, uno per oratore. Ognuno parla per il suo blocco, poi passa la parola.
+- [+ nome] = approfondimento facoltativo: si apre col "+" solo se c'è tempo o se qualcuno lo chiede.
+- Tasti: frecce per avanzare, F per lo schermo intero, Esc chiude un approfondimento.
+- Tono: raccontiamo il workflow che abbiamo costruito insieme, ci fermiamo solo sulle cose meno ovvie.
+
+Tempi indicativi
+- Oratore 1 · slide 1–5 · Contesto e preparazione · 8 minuti
+- Oratore 2 · slide 6–9 · Configurazione e primo codice · 8 minuti
+- Oratore 3 · slide 10–16 · Esecuzione, condivisione, demo, chiusura · 9 minuti + 5 di demo
+
+
+══════════════════════════════════════════════
+ORATORE 1 · slide 1–5 · Contesto e preparazione
+══════════════════════════════════════════════
+
+SLIDE 1 · Da Figma al prototipo con Antigravity
+Ciao a tutti. Vi raccontiamo il workflow con cui, nella settimana AI, abbiamo portato una pagina disegnata in Figma a un prototipo vero, che funziona anche sul telefono, con dentro una piccola feature AI.
+Non è una lezione: è il percorso che abbiamo fatto, con gli strumenti che vedete qui sotto (Figma, Claude, Antigravity, GitHub, Meta AI e Vizcom). Ci fermiamo solo dove qualcosa non è scontato.
+
+SLIDE 2 · Il contesto del progetto
+Il cliente è Libraccio.it, la pagina è la homepage "Offerte e Outlet" disegnata da Gaia in Figma.
+L'obiettivo della settimana era uno solo: dal design a un prototipo HTML funzionante, con una feature AI. Il risultato è la homepage Outlet con Libby, una libraia digitale.
+Lo strumento è Antigravity, un editor di codice con agenti AI.
+Cosa abbiamo imparato: conta dove gira l'agente. In Antigravity Claude lavora sul nostro computer, quindi raggiunge il file Figma aperto, avvia il sito e lo controlla nel browser. È questo che ha reso possibile tutto il resto.
+[+ Antigravity: differenza con Claude Desktop]
+
+SLIDE 3 · Il workflow in tre fasi
+Il lavoro si divide in tre fasi.
+Preparazione, in Claude Desktop: qui si pensa. Prompt maker, file di handoff, cartella di progetto.
+Configurazione, in Antigravity: qui si collega. Il ponte con Figma, le istruzioni, le skill.
+Esecuzione, con Claude Code dentro Antigravity: qui si costruisce. Homepage, responsive, app da telefono, Libby, verifica e pubblicazione.
+Cosa abbiamo imparato: due strumenti, due ruoli. Claude Desktop per decidere conversando, Antigravity per costruire.
+
+SLIDE 4 · Le basi: il Prompt maker
+Tutto parte da qui. Il Prompt maker è uno spazio di Claude, cioè un Progetto con istruzioni fisse e file di contesto che valgono per ogni conversazione. In pratica funziona come una skill personale.
+Le istruzioni gli dicono di comportarsi da prompt designer: prende richieste brevi o disordinate e le trasforma in prompt pronti.
+La knowledge base contiene le regole: capire l'obiettivo reale, trovare i dati mancanti, verificare prima di consegnare.
+Da qui sono usciti i file di handoff: il brief, l'anima di Libby e il prompt di avvio per Antigravity.
+Cosa abbiamo imparato: le decisioni non devono restare nella memoria di una chat. Messe in file, si rileggono, si versionano e si passano a un altro agente o a un collega.
+[+ Istruzioni] [+ Knowledge base]
+
+SLIDE 5 · La cartella di progetto
+A sinistra, in alto, la cartella com'era all'inizio: file sparsi, un README, l'anima di Libby, l'architettura delle informazioni, gli stili e le variabili.
+Sotto, com'è diventata: un brief con tutte le decisioni, il prompt di avvio, e tre cartelle. asset con le immagini del Figma, companion con l'anima e l'avatar di Libby, docs con l'architettura delle informazioni e le variabili del design.
+L'avatar di Libby l'abbiamo generato con Meta AI, ritoccato e poi vettorializzato con Vizcom, così è un SVG nitido a ogni dimensione.
+Cosa abbiamo imparato: l'agente parte da file, non da spiegazioni a voce. Meno ambiguità, risultato ripetibile.
+[+ docs: architettura] [+ Avatar]
+
+Passaggio: «Con la cartella pronta, si passa in Antigravity. Vi racconta [ORATORE 2] come l'abbiamo collegata a Figma.»
+
+
+══════════════════════════════════════════════
+ORATORE 2 · slide 6–9 · Configurazione e primo codice
+══════════════════════════════════════════════
+
+SLIDE 6 · Collegare Figma e Antigravity
+Perché l'agente legga il Figma serve un ponte. Il ponte si chiama figma-ui-mcp.
+MCP è uno standard aperto per collegare un agente AI a strumenti esterni: Figma, il browser, GitHub. Pensatelo come una presa universale.
+figma-ui-mcp è un progetto open source che si prende da GitHub, la piattaforma dove si salva e si condivide il codice. Si aggiunge a Claude Code con un comando, e in Figma desktop si importa il plugin che fa da ponte.
+Da lì l'agente legge dal file aperto variabili, componenti, stili e immagini.
+Cosa abbiamo imparato: figma-ui-mcp gira in locale, senza API key e senza limiti di chiamate. Il connettore Figma ufficiale le aveva già esaurite.
+E quando il ponte cade, e a noi è successo, c'è il comando /mcp per vedere lo stato e riconnettere.
+[+ figma-ui-mcp: installazione] [+ /mcp: quando il ponte cade]
+
+SLIDE 7 · Aprire la cartella e dare le istruzioni
+In Antigravity apriamo la cartella e, nel terminale, scriviamo claude: parte Claude Code.
+Il prompt di avvio è breve, perché rimanda ai file: leggi il brief, copia il design paro paro, prima di scrivere codice fammi le domande, alla fine dimmi cosa hai dovuto ipotizzare.
+A destra vedete le domande vere che Claude ci ha fatto prima di toccare il codice: da dove prendere le immagini, cosa mettere nei dati dei libri, la status bar su tablet e desktop, i breakpoint. Per ognuna proponeva un'opzione consigliata, e noi sceglievamo.
+Cosa abbiamo imparato: domande prima e ipotesi dichiarate alla fine. Il controllo resta a chi progetta, senza decisioni nascoste.
+[+ Claude Code: installarlo, aprirlo, versione con interfaccia] [+ Il prompt di avvio completo]
+
+SLIDE 8 · Le skill
+Le skill sono istruzioni pronte che l'agente carica quando servono: competenze specifiche senza riscriverle ogni volta nel prompt.
+Ne abbiamo usate cinque.
+Caveman, sempre: risposte asciutte e meno token.
+Impeccable e UI/UX Pro Max, solo su Libby: linguaggio di design e regole UX.
+Playwright per le verifiche: l'agente usa il browser.
+Accessibility agents a ogni modifica dell'interfaccia: revisione WCAG 2.2 AA.
+Si installano dal terminale di Claude Code con /plugin.
+Cosa abbiamo imparato: sulla homepage niente skill che ne cambino l'aspetto, perché doveva restare identica al Figma. Le skill di design le abbiamo tenute per Libby.
+[+ un "+" per ogni skill] [+ Installazione]
+
+SLIDE 9 · Da Figma alle variabili e al codice
+Primo risultato: la homepage importata identica.
+Le variabili, cioè colori, testi e spazi, le abbiamo preparate in Claude Desktop con il connettore Figma e completate in Antigravity leggendo il Figma. Si poteva fare anche partendo dai file di variabili e stili che avevamo già: le strade sono due, entrambe valide.
+Poi un componente di codice per ogni componente Figma, gli stessi font, le immagini esportate e smistate, i testi in file di dati.
+Cosa sono i token: un'unica fonte per i valori del design. Se ne cambia uno, cambia ovunque, come nel Figma.
+Cosa abbiamo imparato, l'intoppo: alcune immagini uscivano vuote perché il frame aveva attivo "ritaglia contenuto". Claude ci ha chiesto il permesso, l'ha disattivato per l'export e l'ha riattivato subito.
+[+ Variabili e stili di testo] [+ Lo stack]
+
+Passaggio: «Fin qui la copia fedele. Adesso [ORATORE 3] vi fa vedere cosa abbiamo aggiunto, e come l'abbiamo messo online.»
+
+
+══════════════════════════════════════════════
+ORATORE 3 · slide 10–16 · Esecuzione, condivisione, demo, chiusura
+══════════════════════════════════════════════
+
+SLIDE 10 · Responsive senza disegnare i breakpoint
+Il Figma aveva solo il mobile, 393 pixel. Tablet e desktop non erano disegnati: li abbiamo fatti costruire allargando margini e griglie, fino a 1280 pixel di contenuto.
+Per controllarli abbiamo chiesto uno strumento: premendo Cmd+D la pagina passa da mobile a tablet a desktop, dentro le cornici di iPhone e iPad.
+Cosa abbiamo imparato: Cmd+D l'abbiamo chiesto in una frase e l'agente l'ha costruito per questo progetto. Ogni progetto può avere le sue scorciatoie.
+[+ L'anteprima Cmd+D]
+
+SLIDE 11 · Come un'app sul telefono
+Aperto dal telefono, il sito sembra un'app: la status bar finta del Figma sparisce, i margini rispettano notch e barra home, e si può aggiungere alla Home con l'icona Libraccio.
+Cos'è una PWA: una Progressive Web App è un sito che si installa sulla Home senza passare dallo store. Bastano un manifest e un'icona.
+[+ PWA]
+
+SLIDE 12 · Libby, con poco
+La feature nuova è Libby, la libraia digitale.
+La sua anima è un file: tono, regole e limiti, per esempio al massimo tre libri e mai titoli inventati.
+Il motore sono regole locali che seguono quell'anima, senza API.
+L'interfaccia è a tutto schermo sul telefono e a pannello su desktop. Qui, e solo qui, abbiamo usato le skill di design.
+Cosa abbiamo imparato, senza API: zero costi, nessuna chiave nel repository pubblico, risposte prevedibili e testabili. Domani si collega a un modello AI vero, con la stessa interfaccia.
+Cosa abbiamo imparato, le skill solo qui: la homepage è il Figma e non si tocca. La libertà di design va dove aggiunge valore.
+[+ La chat] [+ Il carattere di Libby]
+
+SLIDE 13 · La verifica
+L'agente controlla da solo quello che ha fatto. Con Playwright apre il sito, simula un iPhone, clicca, scrive, fotografa e confronta con il Figma. Lo screenshot che vedete l'ha fatto lui.
+Gli accessibility agents controllano alt text, tastiera, screen reader e contrasti.
+Cosa abbiamo imparato: la verifica è veloce e ripetibile. E l'accessibilità si controlla mentre si scrive: un hook, cioè una regola che Claude Code esegue da solo, ferma i file dell'interfaccia finché non passano la revisione.
+[+ Cos'è un hook]
+
+SLIDE 14 · Dal locale alla condivisione
+Una cosa che si dà per scontata: vederlo sul nostro computer non vuol dire averlo pubblicato. Con npm run dev il sito gira su localhost, e lo vediamo solo noi.
+Per condividerlo: login a GitHub con gh auth login, dal browser, senza token da copiare. Poi git push. A ogni push GitHub Actions ricompila il sito e GitHub Pages lo pubblica, gratis, perché il sito è statico e non serve un server.
+Qui a destra le due pubblicazioni, entrambe riuscite.
+[+ La pubblicazione]
+
+SLIDE 15 · Demo
+Ed eccolo. Inquadrate il QR, oppure andate su caterinacozzoli.github.io/group-project.
+1. Dal telefono: la homepage, poi Libby. Le chiediamo un consiglio e aggiungiamo un libro al carrello.
+2. Sul desktop: la stessa pagina allargata, con il pannello di Libby.
+3. Cmd+D: mobile, tablet, desktop.
+Piano B: se la rete non regge, facciamo partire il video registrato.
+
+SLIDE 16 · Rifarlo da zero
+Chiudiamo con la parte che si porta via: lo stesso ambiente, per il prossimo progetto. Otto passi.
+Uno spazio Claude con istruzioni e knowledge base. Una cartella ordinata. Antigravity con claude nel terminale. Il ponte con Figma. Le skill che servono, solo dove servono. Un prompt breve, con le domande prima e le ipotesi alla fine. La verifica. E git push, che pubblica da solo.
+Fedeltà dove serve, libertà dove aggiunge valore. Grazie, e se avete domande, siamo qui.

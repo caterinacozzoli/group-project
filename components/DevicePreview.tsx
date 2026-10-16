@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import styles from "./DevicePreview.module.css";
 
@@ -14,7 +15,12 @@ const MODI = [
 const BORDO = { iphone: 14, ipad: 22, "": 0 };
 const TIP_VISTO = "libraccio:tip-device";
 
+// La presentazione non ha l'anteprima ⌘D (né la scorciatoia, né il pop up)
 export default function DevicePreview() {
+  return usePathname().startsWith("/presentazione") ? null : <Anteprima />;
+}
+
+function Anteprima() {
   const [i, setI] = useState(0);
   const [dentroIframe, setDentroIframe] = useState(false);
   const [tip, setTip] = useState(false);
