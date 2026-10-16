@@ -1,0 +1,20 @@
+/* Scorre fino al bordo destro dello schermo, come nel frame Figma */
+.scroller {
+  margin-right: calc(-1 * var(--gutter));
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.scroller::-webkit-scrollbar { display: none; }
+.list { display: flex; gap: 8px; padding-right: var(--gutter); width: max-content; }
+.chip {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 12px;
+  border: 1.5px solid var(--primary-100);
+  border-radius: var(--radius-round);
+  color: var(--primary-100);
+  font: var(--body-2);
+  white-space: nowrap;
+}
+.chip:hover { background: var(--primary-10); }

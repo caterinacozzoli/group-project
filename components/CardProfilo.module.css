@@ -1,0 +1,49 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 12px 8px;
+  background: var(--neutral-10);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-sospensione);
+  overflow: hidden;
+}
+/* Tre cerchi concentrici decorativi in alto a destra (Group 42) */
+.cerchi {
+  position: absolute;
+  top: -83px;
+  right: -104px;
+  width: 217px;
+  height: 217px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, var(--primary-30) 0 39.5px, transparent 40px),
+    radial-gradient(circle, var(--primary-20) 0 77px, transparent 77.5px),
+    var(--primary-10);
+}
+.head { position: relative; display: flex; align-items: center; gap: 12px; }
+.avatar { width: 79px; height: 79px; border-radius: 50%; object-fit: cover; }
+.nomi { width: 168px; display: flex; flex-direction: column; gap: 4px; }
+.nome { font: var(--subh1); }
+.username { font: var(--body-2); color: var(--text-tertiary); }
+.pills { position: relative; display: flex; align-items: center; gap: 17px; }
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px 4px 8px;
+  background: var(--bg-neutral-secondary);
+  border-radius: var(--radius-round);
+  font: var(--body-2);
+}
+.stepper { display: flex; flex-direction: column; gap: 4px; }
+.livelli { display: flex; justify-content: space-between; gap: 12px; }
+.attuale { font: var(--body-1-bold); }
+.prossimo { font: var(--body-1); color: var(--text-muted); }
+.barra { height: 14px; background: var(--secondary-10); border-radius: var(--radius-round); }
+.pallino { display: block; width: 15px; height: 14px; background: var(--secondary-60); border-radius: var(--radius-round); }
+
+@media (min-width: 768px) {
+  .card { max-width: 480px; }
+}

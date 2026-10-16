@@ -1,0 +1,37 @@
+.wrap { position: relative; }
+/* Le card escono fino al bordo destro dello schermo, come nel frame Figma */
+.list {
+  display: flex;
+  margin-inline: calc(-1 * var(--gutter));
+  padding: 4px var(--gutter) 8px; /* spazio per l'ombra delle card */
+  margin-block: -4px -8px;
+  scroll-padding-inline: var(--gutter);
+  scroll-snap-type: x mandatory;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.list::-webkit-scrollbar { display: none; }
+.item { flex: none; scroll-snap-align: start; }
+
+.freccia {
+  display: none;
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  background: var(--neutral-10);
+  border: 2px solid var(--primary-90);
+  border-radius: 100px;
+  box-shadow: var(--shadow-sospensione);
+}
+.prev { left: -22px; }
+.prev img { rotate: 180deg; }
+.next { right: -22px; }
+.freccia:hover { background: var(--primary-10); }
+.freccia:disabled { opacity: 0; pointer-events: none; }
+
+@media (min-width: 1024px) {
+  .freccia { display: grid; }
+}

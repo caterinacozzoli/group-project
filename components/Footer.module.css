@@ -1,0 +1,34 @@
+.footer { display: flex; flex-direction: column; gap: 52px; }
+.servizi { display: flex; flex-direction: column; gap: 16px; }
+.servizio {
+  height: 126px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: var(--radius-m);
+}
+.blu { background: var(--blue-docente); color: var(--neutral-10); }
+.rosa { background: var(--pink-dote); color: var(--text-primary); }
+.testi { display: flex; flex-direction: column; gap: 8px; }
+/* Carta del docente: logo in alto, testi in basso (space-between, alta 125) */
+.servizio:first-child { height: 125px; }
+.servizio:first-child .testi { height: 101px; justify-content: space-between; }
+.titolo { font: var(--body-2-5-bold); }
+.descr { font: 400 12px/145% var(--font-jakarta); }
+.freccia {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--neutral-10);
+  border-radius: 100px;
+}
+.freccia:hover { background: rgba(255, 255, 255, .15); }
+.logo { height: 95px; display: flex; align-items: center; padding: 0 16px; background: var(--primary-90); }
+
+@media (min-width: 768px) {
+  .servizi { display: grid; grid-template-columns: repeat(3, 1fr); }
+}

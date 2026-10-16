@@ -1,0 +1,16 @@
+.bar {
+  height: 53px;
+  padding: 18px 26px 14px 27px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.time {
+  width: 54px;
+  font: 600 17px/22px var(--font-ios);
+  letter-spacing: -0.408px;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .bar { display: none; }
+}

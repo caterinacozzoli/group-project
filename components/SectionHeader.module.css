@@ -1,0 +1,13 @@
+.head { display: flex; align-items: center; justify-content: space-between; min-height: 44px; }
+.semplice { min-height: 33px; } /* altezza titolo Figma senza bottone */
+.titolo { font: var(--subh2); }
+.vedi {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--primary-90);
+  border-radius: 100px;
+}
+.vedi:hover { background: var(--primary-10); }

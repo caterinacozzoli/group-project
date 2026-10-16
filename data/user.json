@@ -1,0 +1,17 @@
+{
+  "loggato": true,
+  "nome": "Marica",
+  "nomeCompleto": "Marica Rossi",
+  "username": "marica.rossi99",
+  "avatar": "/assets/profile/avatar-marica.png",
+  "punti": "23",
+  "streak": "Di fila",
+  "livello": "Novellino",
+  "prossimoLivello": "Sfogliatore",
+  "profiloLettore": {
+    "_nota": "Ipotesi: non presente in Figma. Serve a Libby per l'utente loggato.",
+    "generiPreferiti": ["gialli", "romanzi rosa"],
+    "moodPreferiti": ["intrigante", "leggero"],
+    "autoriLetti": ["Maurizio de Giovanni"]
+  }
+}

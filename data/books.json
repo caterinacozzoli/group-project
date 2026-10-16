@@ -1,0 +1,641 @@
+{
+  "libri": [
+    {
+      "id": "omicidi-srl",
+      "titolo": "Omicidi Srl",
+      "autore": "Alessandro Rebecchi",
+      "stato": "nuovo",
+      "etichetta": "NOVITÀ",
+      "rarita": null,
+      "prezzo": "€ 16,15",
+      "prezzoVecchio": "€ 17,00",
+      "sconto": "5% di sconto",
+      "copertina": "/assets/covers/omicidi-srl.png",
+      "generi": [
+        "gialli"
+      ],
+      "mood": [
+        "ironico",
+        "intrigante"
+      ]
+    },
+    {
+      "id": "il-commissario-spinelli-e-i-sepolcri-imbiancati",
+      "titolo": "Il commissario Spinelli e i sepolcri imbiancati. La prima indagine",
+      "autore": "Alfredo Ricciardi",
+      "stato": "outlet",
+      "etichetta": "LAST CHANCE",
+      "rarita": "popolare",
+      "prezzo": "€ 6,00",
+      "prezzoVecchio": "€ 15,00",
+      "sconto": "60% di sconto",
+      "copertina": "/assets/covers/il-commissario-spinelli-e-i-sepolcri-imbiancati.png",
+      "generi": [
+        "gialli"
+      ],
+      "mood": [
+        "intrigante",
+        "ironico"
+      ]
+    },
+    {
+      "id": "la-casa-sulla-spiaggia-the-kissing-booth",
+      "titolo": "La casa sulla spiaggia. The kissing booth",
+      "autore": "Beth Reekles",
+      "stato": "usato",
+      "etichetta": "USATO",
+      "rarita": "popolare",
+      "prezzo": "€ 8,25",
+      "prezzoVecchio": "€ 15,00",
+      "sconto": "45% di sconto",
+      "copertina": "/assets/covers/la-casa-sulla-spiaggia-the-kissing-booth.png",
+      "generi": [
+        "young adult",
+        "romanzi rosa"
+      ],
+      "mood": [
+        "leggero",
+        "romantico"
+      ]
+    },
+    {
+      "id": "lamuleto",
+      "titolo": "L’amuleto",
+      "autore": "Michael McDowell",
+      "stato": "preordine",
+      "etichetta": "PREORDINE",
+      "rarita": null,
+      "prezzo": "€ 15,11",
+      "prezzoVecchio": "€ 15,90",
+      "sconto": "5% di sconto",
+      "copertina": "/assets/covers/lamuleto.png",
+      "generi": [
+        "horror"
+      ],
+      "mood": [
+        "cupo",
+        "intrigante"
+      ]
+    },
+    {
+      "id": "saggio-sulla-lucidita",
+      "titolo": "Saggio sulla lucidità",
+      "autore": "Josè Saramago",
+      "stato": "offerta",
+      "etichetta": "OFFERTA",
+      "rarita": "popolare",
+      "prezzo": "€ 13,00",
+      "prezzoVecchio": null,
+      "sconto": "2 libri a soli €11,90",
+      "copertina": "/assets/covers/saggio-sulla-lucidita.png",
+      "generi": [
+        "narrativa",
+        "classici"
+      ],
+      "mood": [
+        "riflessivo",
+        "impegnativo"
+      ]
+    },
+    {
+      "id": "la-montagna-sei-tu-trasformare-lautosabotaggio-i",
+      "titolo": "La montagna sei tu. Trasformare l’autosabotaggio in autocontrollo",
+      "autore": "Brianna West",
+      "stato": "offerta",
+      "etichetta": "OFFERTA",
+      "rarita": null,
+      "prezzo": "€ 14,32",
+      "prezzoVecchio": "€ 17,00",
+      "sconto": "Sonzogno -20%",
+      "copertina": "/assets/covers/la-montagna-sei-tu-trasformare-lautosabotaggio-i.png",
+      "generi": [
+        "crescita personale"
+      ],
+      "mood": [
+        "motivante"
+      ]
+    },
+    {
+      "id": "racconti-scritti-da-donne-nude",
+      "titolo": "Racconti scritti da donne nude",
+      "autore": "Stefano Rapone",
+      "stato": "outlet",
+      "etichetta": "LAST CHANCE",
+      "rarita": null,
+      "prezzo": "€ 8,00",
+      "prezzoVecchio": "€ 16,00",
+      "sconto": "50% di sconto",
+      "copertina": "/assets/covers/racconti-scritti-da-donne-nude.png",
+      "generi": [
+        "umorismo"
+      ],
+      "mood": [
+        "ironico",
+        "leggero"
+      ]
+    },
+    {
+      "id": "kolchoz",
+      "titolo": "Kolchoz",
+      "autore": "Emmanuel Carrère",
+      "stato": "preordine",
+      "etichetta": "PREORDINE",
+      "rarita": null,
+      "prezzo": "€ 20,90",
+      "prezzoVecchio": "€ 22,00",
+      "sconto": "5% di sconto",
+      "copertina": "/assets/covers/kolchoz.png",
+      "generi": [
+        "narrativa"
+      ],
+      "mood": [
+        "riflessivo"
+      ]
+    },
+    {
+      "id": "fiori-di-algeron",
+      "titolo": "Fiori di Algeron",
+      "autore": "Daniel Keyes",
+      "stato": "nuovo",
+      "etichetta": "NOVITÀ",
+      "rarita": "popolare",
+      "prezzo": "€ 11,40",
+      "prezzoVecchio": "€ 12,00",
+      "sconto": "5% di sconto",
+      "copertina": "/assets/covers/fiori-di-algeron.png",
+      "generi": [
+        "narrativa",
+        "fantascienza"
+      ],
+      "mood": [
+        "commovente",
+        "riflessivo"
+      ]
+    },
+    {
+      "id": "i-fratelli-karamazov-ediz-integrale",
+      "titolo": "I fratelli Karamazov. Ediz. integrale",
+      "autore": "Fëdor Dostoevskij",
+      "stato": "outlet",
+      "etichetta": "LAST CHANCE",
+      "rarita": "popolare",
+      "prezzo": "€ 7,60",
+      "prezzoVecchio": "€ 19,00",
+      "sconto": "60% di sconto",
+      "copertina": "/assets/covers/i-fratelli-karamazov-ediz-integrale.png",
+      "generi": [
+        "classici"
+      ],
+      "mood": [
+        "riflessivo",
+        "impegnativo"
+      ]
+    },
+    {
+      "id": "la-tela-di-carlotta",
+      "titolo": "La tela di Carlotta",
+      "autore": "E.B. White",
+      "stato": "outlet",
+      "etichetta": "LAST CHANCE",
+      "rarita": "popolare",
+      "prezzo": "€ 4,20",
+      "prezzoVecchio": "€ 10,50",
+      "sconto": "60% di sconto",
+      "copertina": "/assets/covers/la-tela-di-carlotta.png",
+      "generi": [
+        "ragazzi",
+        "classici"
+      ],
+      "mood": [
+        "tenero",
+        "leggero"
+      ]
+    },
+    {
+      "id": "2001-odissea-nello-spazio",
+      "titolo": "2001 odissea nello spazio",
+      "autore": "Arthur C. Clarke",
+      "stato": "outlet",
+      "etichetta": "LAST CHANCE",
+      "rarita": "popolare",
+      "prezzo": "€ 3,96",
+      "prezzoVecchio": "€ 9,90",
+      "sconto": "60% di sconto",
+      "copertina": "/assets/covers/2001-odissea-nello-spazio.png",
+      "generi": [
+        "fantascienza",
+        "classici"
+      ],
+      "mood": [
+        "avventura",
+        "riflessivo"
+      ]
+    },
+    {
+      "id": "tre-insoliti-delitti",
+      "titolo": "Tre insoliti delitti",
+      "autore": "Mattero Strukul",
+      "stato": "outlet",
+      "etichetta": "LAST CHANCE",
+      "rarita": "popolare",
+      "prezzo": "€ 3,96",
+      "prezzoVecchio": "€ 9,90",
+      "sconto": "60% di sconto",
+      "copertina": "/assets/covers/tre-insoliti-delitti.png",
+      "generi": [
+        "gialli"
+      ],
+      "mood": [
+        "intrigante"
+      ]
+    },
+    {
+      "id": "il-cuore-non-va-a-dormire",
+      "titolo": "Il cuore non va a dormire",
+      "autore": "Enrico Galiano",
+      "stato": "nuovo",
+      "etichetta": "NOVITÀ",
+      "rarita": null,
+      "prezzo": "€ 19,00",
+      "prezzoVecchio": "€ 20,00",
+      "sconto": "5% di sconto",
+      "copertina": "/assets/covers/il-cuore-non-va-a-dormire.png",
+      "generi": [
+        "narrativa"
+      ],
+      "mood": [
+        "romantico",
+        "commovente"
+      ]
+    },
+    {
+      "id": "scegliti-sempre",
+      "titolo": "Scegliti sempre",
+      "autore": "Roberto Emanuelli",
+      "stato": "nuovo",
+      "etichetta": "NOVITÀ",
+      "rarita": null,
+      "prezzo": "€ 18,05",
+      "prezzoVecchio": "€ 19,00",
+      "sconto": "5% di sconto",
+      "copertina": "/assets/covers/scegliti-sempre.png",
+      "generi": [
+        "narrativa",
+        "crescita personale"
+      ],
+      "mood": [
+        "romantico",
+        "motivante"
+      ]
+    },
+    {
+      "id": "figli-per-i-bastardi-di-pizzofalcone",
+      "titolo": "Figli per i Bastardi di Pizzofalcone",
+      "autore": "Maurizio de Giovanni",
+      "stato": "nuovo",
+      "etichetta": "NOVITÀ",
+      "rarita": null,
+      "prezzo": "€ 18,05",
+      "prezzoVecchio": "€ 19,00",
+      "sconto": "5% di sconto",
+      "copertina": "/assets/covers/figli-per-i-bastardi-di-pizzofalcone.png",
+      "generi": [
+        "gialli"
+      ],
+      "mood": [
+        "intrigante"
+      ]
+    },
+    {
+      "id": "unottima-famiglia",
+      "titolo": "Un’ottima famiglia",
+      "autore": "Stefania Andreoli",
+      "stato": "nuovo",
+      "etichetta": "NOVITÀ",
+      "rarita": null,
+      "prezzo": "€ 16,15",
+      "prezzoVecchio": "€ 17,00",
+      "sconto": "5% di sconto",
+      "copertina": "/assets/covers/unottima-famiglia.png",
+      "generi": [
+        "saggistica"
+      ],
+      "mood": [
+        "riflessivo"
+      ]
+    },
+    {
+      "id": "tra-cesare-e-dio-come-la-rivoluzione-di-papa-fra",
+      "titolo": "Tra Cesare e Dio. Come la rivoluzione di papa Francesco cambierà gli italiani",
+      "autore": "Corrado Augias",
+      "stato": "outlet",
+      "etichetta": "LAST CHANCE",
+      "rarita": "popolare",
+      "prezzo": "€ 6,00",
+      "prezzoVecchio": "€ 15,00",
+      "sconto": "60% di sconto",
+      "copertina": "/assets/covers/tra-cesare-e-dio-come-la-rivoluzione-di-papa-fra.png",
+      "generi": [
+        "saggistica"
+      ],
+      "mood": [
+        "riflessivo",
+        "impegnativo"
+      ]
+    },
+    {
+      "id": "la-via-di-casa",
+      "titolo": "La via di casa",
+      "autore": "Loiuse Penny",
+      "stato": "outlet",
+      "etichetta": "LAST CHANCE",
+      "rarita": "popolare",
+      "prezzo": "€ 6,00",
+      "prezzoVecchio": "€ 15,00",
+      "sconto": "60% di sconto",
+      "copertina": "/assets/covers/la-via-di-casa.png",
+      "generi": [
+        "gialli"
+      ],
+      "mood": [
+        "intrigante",
+        "avvolgente"
+      ]
+    },
+    {
+      "id": "una-deliziosa-pasticceria-a-parigi",
+      "titolo": "Una deliziosa pasticceria a Parigi",
+      "autore": "Laura Madeleine",
+      "stato": "outlet",
+      "etichetta": "LAST CHANCE",
+      "rarita": "popolare",
+      "prezzo": "€ 4,36",
+      "prezzoVecchio": "€ 10,90",
+      "sconto": "60% di sconto",
+      "copertina": "/assets/covers/una-deliziosa-pasticceria-a-parigi.png",
+      "generi": [
+        "romanzi rosa",
+        "narrativa"
+      ],
+      "mood": [
+        "leggero",
+        "romantico"
+      ]
+    },
+    {
+      "id": "la-ragazza-nel-giardino-degli-ulivi",
+      "titolo": "La ragazza nel giardino degli ulivi",
+      "autore": "Dinah Jefferies",
+      "stato": "outlet",
+      "etichetta": "LAST CHANCE",
+      "rarita": "popolare",
+      "prezzo": "€ 3,96",
+      "prezzoVecchio": "€ 9,90",
+      "sconto": "60% di sconto",
+      "copertina": "/assets/covers/la-ragazza-nel-giardino-degli-ulivi.png",
+      "generi": [
+        "romanzi rosa",
+        "storico"
+      ],
+      "mood": [
+        "avvolgente",
+        "romantico"
+      ]
+    },
+    {
+      "id": "la-caduta-dei-giganti-the-century-trilogy-vol-1",
+      "titolo": "La caduta dei giganti. The century trilogy. Vol. 1",
+      "autore": "Ken Follett",
+      "stato": "usato",
+      "etichetta": "USATO",
+      "rarita": "popolare",
+      "prezzo": "€ 13,75",
+      "prezzoVecchio": "€ 25,00",
+      "sconto": "45% di sconto",
+      "copertina": "/assets/covers/la-caduta-dei-giganti-the-century-trilogy-vol-1.png",
+      "generi": [
+        "storico"
+      ],
+      "mood": [
+        "avvolgente",
+        "avventura",
+        "impegnativo"
+      ]
+    },
+    {
+      "id": "la-damigella-d-onore",
+      "titolo": "La damigella d'onore",
+      "autore": "Jane Costello",
+      "stato": "usato",
+      "etichetta": "USATO",
+      "rarita": "popolare",
+      "prezzo": "€ 10,18",
+      "prezzoVecchio": "€ 18,50",
+      "sconto": "45% di sconto",
+      "copertina": "/assets/covers/la-damigella-d-onore.png",
+      "generi": [
+        "romanzi rosa"
+      ],
+      "mood": [
+        "leggero",
+        "ironico"
+      ]
+    },
+    {
+      "id": "viaggio-nel-tempo-4",
+      "titolo": "Viaggio nel tempo 4",
+      "autore": "Geronimo Stilton",
+      "stato": "usato",
+      "etichetta": "USATO",
+      "rarita": "popolare",
+      "prezzo": "€ 13,75",
+      "prezzoVecchio": "€ 25,00",
+      "sconto": "45% di sconto",
+      "copertina": "/assets/covers/viaggio-nel-tempo-4.png",
+      "generi": [
+        "ragazzi"
+      ],
+      "mood": [
+        "avventura",
+        "leggero"
+      ]
+    },
+    {
+      "id": "estasi-culinarie",
+      "titolo": "Estasi culinarie",
+      "autore": "Muriel Barbery",
+      "stato": "usato",
+      "etichetta": "USATO",
+      "rarita": "popolare",
+      "prezzo": "€ 8,25",
+      "prezzoVecchio": "€ 15,00",
+      "sconto": "45% di sconto",
+      "copertina": "/assets/covers/estasi-culinarie.png",
+      "generi": [
+        "narrativa"
+      ],
+      "mood": [
+        "riflessivo",
+        "leggero"
+      ]
+    },
+    {
+      "id": "e-colpa-vostra",
+      "titolo": "È colpa vostra",
+      "autore": "Mercedes Ron",
+      "stato": "preordine",
+      "etichetta": "PREORDINE",
+      "rarita": null,
+      "prezzo": "€ 17,10",
+      "prezzoVecchio": "€ 18,00",
+      "sconto": "5% di sconto",
+      "copertina": "/assets/covers/e-colpa-vostra.png",
+      "generi": [
+        "young adult",
+        "romanzi rosa"
+      ],
+      "mood": [
+        "romantico"
+      ]
+    },
+    {
+      "id": "gli-anni-in-bianco-e-nero",
+      "titolo": "Gli anni in  bianco e nero",
+      "autore": "Francesca Giannone",
+      "stato": "preordine",
+      "etichetta": "PREORDINE",
+      "rarita": null,
+      "prezzo": "€ 19,00",
+      "prezzoVecchio": "€ 20,00",
+      "sconto": "5% di sconto",
+      "copertina": "/assets/covers/gli-anni-in-bianco-e-nero.png",
+      "generi": [
+        "narrativa",
+        "storico"
+      ],
+      "mood": [
+        "avvolgente"
+      ]
+    },
+    {
+      "id": "io-sono-adele",
+      "titolo": "Io sono Adele",
+      "autore": "Csaba dalla Zorza",
+      "stato": "preordine",
+      "etichetta": "PREORDINE",
+      "rarita": null,
+      "prezzo": "€ 17,10",
+      "prezzoVecchio": "€ 18,00",
+      "sconto": "5% di sconto",
+      "copertina": "/assets/covers/io-sono-adele.png",
+      "generi": [
+        "narrativa"
+      ],
+      "mood": [
+        "leggero"
+      ]
+    },
+    {
+      "id": "scrivere-il-cielo-poesie-al-contrario",
+      "titolo": "Scrivere il cielo. Poesie al contrario",
+      "autore": "Roberto Vecchioni",
+      "stato": "preordine",
+      "etichetta": "PREORDINE",
+      "rarita": null,
+      "prezzo": "€ 18,05",
+      "prezzoVecchio": "€ 19,00",
+      "sconto": "5% di sconto",
+      "copertina": "/assets/covers/scrivere-il-cielo-poesie-al-contrario.png",
+      "generi": [
+        "poesia"
+      ],
+      "mood": [
+        "riflessivo"
+      ]
+    }
+  ],
+  "scaffali": [
+    {
+      "id": "scelti-per-te",
+      "titolo": "Scelti per te",
+      "vediTutti": true,
+      "libri": [
+        "omicidi-srl",
+        "il-commissario-spinelli-e-i-sepolcri-imbiancati",
+        "la-casa-sulla-spiaggia-the-kissing-booth",
+        "lamuleto"
+      ]
+    },
+    {
+      "id": "preferiti-in-sconto",
+      "titolo": "Preferiti in sconto",
+      "vediTutti": true,
+      "libri": [
+        "saggio-sulla-lucidita",
+        "la-montagna-sei-tu-trasformare-lautosabotaggio-i",
+        "racconti-scritti-da-donne-nude",
+        "kolchoz"
+      ]
+    },
+    {
+      "id": "bestseller",
+      "titolo": "Bestseller",
+      "vediTutti": true,
+      "libri": [
+        "fiori-di-algeron",
+        "i-fratelli-karamazov-ediz-integrale",
+        "la-tela-di-carlotta",
+        "2001-odissea-nello-spazio",
+        "tre-insoliti-delitti"
+      ]
+    },
+    {
+      "id": "ultime-uscite",
+      "titolo": "Ultime uscite",
+      "vediTutti": false,
+      "libri": [
+        "il-cuore-non-va-a-dormire",
+        "scegliti-sempre",
+        "omicidi-srl",
+        "figli-per-i-bastardi-di-pizzofalcone",
+        "unottima-famiglia"
+      ]
+    },
+    {
+      "id": "outlet",
+      "titolo": "Ultima occasione >50%",
+      "vediTutti": true,
+      "libri": [
+        "tra-cesare-e-dio-come-la-rivoluzione-di-papa-fra",
+        "il-commissario-spinelli-e-i-sepolcri-imbiancati",
+        "la-via-di-casa",
+        "una-deliziosa-pasticceria-a-parigi",
+        "la-ragazza-nel-giardino-degli-ulivi"
+      ]
+    },
+    {
+      "id": "libri-usati",
+      "titolo": "Libri usati",
+      "vediTutti": true,
+      "libri": [
+        "la-caduta-dei-giganti-the-century-trilogy-vol-1",
+        "la-damigella-d-onore",
+        "la-casa-sulla-spiaggia-the-kissing-booth",
+        "viaggio-nel-tempo-4",
+        "estasi-culinarie"
+      ]
+    },
+    {
+      "id": "libri-prenotabili",
+      "titolo": "Libri prenotabili",
+      "vediTutti": true,
+      "libri": [
+        "e-colpa-vostra",
+        "lamuleto",
+        "gli-anni-in-bianco-e-nero",
+        "io-sono-adele",
+        "scrivere-il-cielo-poesie-al-contrario"
+      ]
+    }
+  ]
+}

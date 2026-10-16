@@ -1,0 +1,42 @@
+/* Token estratti da Figma (Style guide 0:1 + homepage 2294:25887) — bozza, 16/10/2026 */
+:root {
+  /* Primitivi — Primary (verde) */
+  --primary-100:#214E3A; --primary-90:#0F7E39; --primary-80:#28A758; --primary-70:#4BCF7D; --primary-60:#77F8A8;
+  --primary-50:#92FFBB; --primary-40:#AAFFCA; --primary-30:#C2FFD9; --primary-20:#DAFFE8; --primary-10:#F1FFF6;
+  /* Secondary (arancio) */
+  --secondary-100:#561600; --secondary-90:#782205; --secondary-80:#9A3412; --secondary-70:#BC4A24; --secondary-60:#DE633B;
+  --secondary-50:#FF8056; --secondary-40:#FF9D7C; --secondary-30:#FFB9A2; --secondary-20:#FFD6C8; --secondary-10:#FFF2EE;
+  /* Accent (lime) */
+  --accent-100:#213300; --accent-90:#415B0C; --accent-80:#4D6C08; --accent-70:#608902; --accent-60:#82B500;
+  --accent-50:#B1F100; --accent-40:#C5FB20; --accent-30:#D6FF53; --accent-20:#E7FF92; --accent-10:#FAFFE4;
+  /* Neutrals */
+  --neutral-60:#101010; --neutral-50:#424242; --neutral-40:#777777; --neutral-30:#DADBDA; --neutral-20:#DCDCDC; --neutral-10:#FFFFFF;
+  /* Altri usati in pagina */
+  --yellow-60:#F1D900; --yellow-50:#FFEA2E; --red-70:#C23636; --blue-70:#367CC2;
+
+  /* Semantici — background */
+  --bg-neutral-primary:#FFFFFF; --bg-neutral-secondary:#F9F9F9; --bg-neutral-tertiary:#DADBDA; --bg-neutral-disabled:#DADBDA;
+  --bg-paper:#F5F4EE; --bg-grey:#EEEEEE;
+  --bg-brand-primary:#0F7E39; --bg-brand-primary-secondary:#92FFBB; --bg-brand-primary-tertiary:#F1FFF6;
+  --bg-brand-secondary:#DE633B; --bg-brand-secondary-secondary:#FF9D7C; --bg-brand-secondary-tertiary:#FFF2EE;
+  --bg-success-subtle:#F1FFF6; --bg-success-bold:#28A758; --bg-warning-subtle:#FFF2EE; --bg-warning-bold:#DE633B;
+  --bg-error-subtle:#FFF0F0; --bg-error-bold:#A02020; --bg-info-subtle:#F0F8FF; --bg-info-bold:#2060A0;
+  /* Semantici — testo */
+  --text-primary:#000000; --text-secondary:#57615B; --text-tertiary:#6B756F; --text-disabled:#FFFFFF;
+  --text-brand-primary:#F1FFF6; --text-brand-primary-inverse:#0F7E39; --text-brand-secondary-inverse:#DE633B; --text-warning-bold:#DE633B;
+  --border-default:#D9D9D9;
+
+  /* Tipografia (stili "Mobile/…" usati nel design) */
+  --font-heading:'Bitter', serif; --font-body:'Poppins', sans-serif;
+  --h3:700 32px/1 var(--font-heading); --subh1:700 28px/1 var(--font-heading);
+  --subh2:700 24px/1 var(--font-heading); --subh3:700 20px/1 var(--font-heading);
+  --body-1:400 12px/1 var(--font-body); --body-1-bold:600 12px/1 var(--font-body);
+  --body-2:400 16px/1 var(--font-body); --body-2-bold:600 16px/1 var(--font-body);
+  --body-2-5-bold:600 20px/1 var(--font-body); --body-4-bold:600 30px/1 var(--font-body);
+
+  /* Raggi, spazi, ombre */
+  --radius-s:8px; --radius-m:12px; --radius-l:16px; --radius-xl:24px; --radius-round:999px;
+  --space-1:4px; --space-2:8px;
+  --shadow-sospensione:0 2px 4px rgba(0,0,0,.05);
+  --shadow-200:0 1px 4px rgba(12,12,13,.05), 0 1px 4px rgba(12,12,13,.1);
+}

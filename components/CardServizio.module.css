@@ -1,0 +1,20 @@
+/* carosello servizi "Da qui, tutto" (283 × 400) */
+.card {
+  position: relative;
+  width: 283px;
+  height: 400px;
+  padding: 16px 24px;
+  background: var(--primary-20);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sospensione);
+  overflow: hidden;
+}
+.conLogo { padding-top: 22px; }
+.img { position: absolute; object-fit: cover; border-radius: 0 0 24px 24px; }
+.titoli { position: relative; display: flex; flex-direction: column; width: 185px; }
+.conLogo .titoli { width: 235px; gap: 2px; }
+.occhiello { font: var(--body-2); color: var(--text-secondary); }
+.occhielloScuro { font: var(--body-2); color: var(--text-primary); }
+.titolo { font: var(--body-4-bold); }
+.conLogo .titolo { width: 216px; }
+.cta { position: absolute; left: 24px; top: 344px; width: 234px; }

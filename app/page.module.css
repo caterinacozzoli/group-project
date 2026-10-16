@@ -1,0 +1,18 @@
+/* Frame 393 px: margini 16, sezioni distanziate 32 */
+.pagina {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sezioni);
+  overflow-x: clip;
+}
+.main { display: flex; flex-direction: column; gap: var(--gap-sezioni); }
+.saluto { display: flex; flex-direction: column; gap: 16px; }
+.h1 { font: var(--h3); line-height: 38px; } /* box Figma 38 */
+.sezione { display: flex; flex-direction: column; gap: 24px; }
+
+@media (min-width: 768px) {
+  .pagina { padding-top: 24px; }
+}

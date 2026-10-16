@@ -1,0 +1,26 @@
+/* card.mysterybox (361 × 285) */
+.card {
+  position: relative;
+  height: 285px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.img { width: 100%; height: 268px; max-width: none; object-fit: cover; object-position: left top; box-shadow: var(--shadow-sospensione); }
+.barra {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 191px;
+  height: 94px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 16px 16px;
+  background: var(--primary-100);
+}
+.titolo { font: var(--subh2); color: var(--accent-40); }
+.testo { font: var(--body-1); color: var(--neutral-10); }
+
+@media (min-width: 768px) {
+  .card { max-width: 720px; }
+}

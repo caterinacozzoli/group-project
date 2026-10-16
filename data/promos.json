@@ -1,0 +1,16 @@
+{
+  "offerte": [
+    { "id": "universale-economica", "immagine": "/assets/promo/universale-economica.png", "alt": "2 libri = 11,90 €. Universale Economica Feltrinelli", "scadenza": "fino ad esaurimento scorte", "testo": "2 libri Universale Economica", "evidenza": "a soli € 11,90" },
+    { "id": "newton-compton", "immagine": "/assets/promo/newton-compton.png", "alt": "Romanzi Newton Compton in promozione", "scadenza": "fino ad esaurimento scorte", "testo": "2 romanzi Newton Compton", "evidenza": "a soli € 9,90" },
+    { "id": "sonzogno", "immagine": "/assets/promo/sonzogno.png", "alt": "Libri Sonzogno in promozione", "scadenza": "fino al 3 maggio", "testo": "Sonzogno", "evidenza": "20% di sconto" },
+    { "id": "laterza-barbero", "immagine": "/assets/promo/laterza-barbero.png", "alt": "Libri Laterza con l'inedito di Alessandro Barbero", "scadenza": "fino al 10 maggio", "testo": "con un libro Laterza l’inedito di Alessandro Barbero", "evidenza": "in omaggio" }
+  ],
+  "mysteryBox": {
+    "titoloSezione": "Se non sai cosa leggere",
+    "immagine": "/assets/promo/mystery-box.png",
+    "titolo": "Mystery box",
+    "testo": "Una box, tanti libri, zero spoiler!",
+    "cta": "Scegli la tua",
+    "href": "#"
+  }
+}

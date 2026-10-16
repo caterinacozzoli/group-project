@@ -1,0 +1,15 @@
+.bar {
+  height: 60px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--neutral-10);
+  border-radius: var(--radius-round);
+  box-shadow: var(--shadow-sospensione);
+}
+.logo img { width: 131px; height: 24px; }
+.icons { display: flex; align-items: center; gap: 8px; }
+.icons a, .search { display: block; border-radius: var(--radius-round); }
+.search { padding: 3px; }
+.icons a:hover, .search:hover { background: var(--bg-search); }

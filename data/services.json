@@ -1,0 +1,18 @@
+{
+  "chips": ["Libri nuovi", "Libri usati", "Scuola e uni", "Offerte", "Vendita usato"],
+  "daQuiTutto": [
+    { "id": "vendi-libri", "occhiello": "Vendi i tuoi libri", "titolo": "Non buttarli", "cta": "Vendi i tuoi libri usati", "href": "#",
+      "immagine": "/assets/services/vendi-libri.png", "img": { "x": 0, "y": 25, "w": 283, "h": 375 } },
+    { "id": "ultime-occasioni", "occhiello": "Ultime occasioni", "occhielloScuro": true, "titolo": "Tutto al 50%", "titoloLargo": true, "cta": "Non aspettare", "href": "#",
+      "immagine": "/assets/services/ultime-occasioni.png", "img": { "x": 13, "y": 67, "w": 256, "h": 333 } },
+    { "id": "scuola", "occhiello": "Scuola e Università", "titolo": "La tua lista è pronta", "cta": "Acquista i libri scolastici", "href": "#",
+      "immagine": "/assets/services/scuola.png", "img": { "x": 0, "y": 117, "w": 283, "h": 283 } },
+    { "id": "ereader", "logo": "/assets/services/logo-kobo.png", "logoAlt": "Rakuten Kobo", "titolo": "Scopri una nuova storia", "cta": "Esplora i prodotti Kobo", "href": "#",
+      "immagine": "/assets/services/ereader.png", "img": { "x": 28, "y": 149, "w": 237, "h": 251 } }
+  ],
+  "footer": [
+    { "id": "carta-docente", "titolo": "Carta del docente", "testo": "Acquista libri nuovi e usati con il tuo bonus", "logo": "/assets/services/carta-docente.png", "logoW": 87, "logoH": 29, "tema": "blu", "href": "#" },
+    { "id": "dote-scuola", "titolo": "Dote scuola", "testo": "Usa subito il tuo buono su Libraccio.it", "logo": "/assets/services/dote-scuola.png", "logoW": 82, "logoH": 30, "tema": "rosa", "href": "#" },
+    { "id": "carte-cultura", "titolo": "Carte cultura", "testo": "Usala per acquistare libri", "logo": "/assets/services/carte-cultura.png", "logoW": 82, "logoH": 30, "tema": "blu", "href": "#" }
+  ]
+}

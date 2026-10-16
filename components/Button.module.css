@@ -1,0 +1,15 @@
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  height: 40px;
+  padding: 8px;
+  background: var(--secondary-60);
+  border-radius: var(--radius-s);
+  color: var(--neutral-10);
+  font: var(--body-2);
+  white-space: nowrap;
+  transition: background .2s;
+}
+.btn:hover { background: var(--secondary-70); }
