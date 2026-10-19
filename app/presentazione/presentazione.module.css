@@ -51,6 +51,15 @@
 .testata {
   padding: 16px;
   color: var(--grigio);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logoAngolo {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin: 0 16px;
 }
 .fase {
   margin-top: 10px;
@@ -277,6 +286,14 @@
     background: #fff;
     border-radius: 2px;
   }
+  .polaroid,
+  .foglio {
+    forced-color-adjust: none;
+    background: #fff;
+  }
+  .foglio img {
+    mix-blend-mode: normal;
+  }
 }
 
 .domande ol {
@@ -310,7 +327,8 @@
   height: auto;
   border: 1px solid var(--linea);
 }
-.telefono img {
+.telefono img,
+.telefono video {
   width: min(280px, 100%);
   aspect-ratio: 393 / 852;
   object-fit: cover;
@@ -412,6 +430,93 @@
 
 .copertina .titolo {
   font-size: calc(var(--t-titolo) * 1.25);
+}
+
+.oratori {
+  margin-top: 16px;
+  font-size: var(--t-dettaglio);
+  color: var(--grigio);
+}
+
+.linkPrototipo {
+  font: 400 var(--t-voce) / 1.15 var(--titoli);
+}
+.linkPrototipo a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.finale {
+  text-align: center;
+}
+.finale .titolo {
+  font-size: calc(var(--t-titolo) * 1.25);
+}
+.nomiFinale {
+  font: 400 var(--t-voce) / 1.4 var(--titoli);
+  color: var(--grigio);
+}
+/* Dietro le quinte: polaroid storte e il logo come schizzo su un foglio a quadretti */
+.quinte {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 8px;
+  padding: 0;
+  list-style: none;
+}
+.polaroid,
+.foglio {
+  background: #fff;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.18);
+}
+.polaroid {
+  padding: 8px 8px 32px;
+  rotate: -3deg;
+}
+.polaroid:nth-child(2) {
+  rotate: 2.5deg;
+}
+.polaroid:last-child {
+  rotate: -1.5deg;
+}
+.polaroid img,
+.foglio img {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  height: 150px;
+  object-fit: contain;
+}
+.foglio {
+  position: relative;
+  padding: 12px;
+  rotate: 1.5deg;
+  background:
+    linear-gradient(#e8edf3 1px, transparent 1px) 0 0 / 18px 18px,
+    linear-gradient(90deg, #e8edf3 1px, transparent 1px) 0 0 / 18px 18px,
+    #fdfcf7;
+}
+.foglio img {
+  mix-blend-mode: multiply;
+}
+/* Nastro adesivo, decorativo */
+.foglio::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 72px;
+  height: 20px;
+  translate: -50% 0;
+  rotate: -3deg;
+  background: rgb(240 225 170 / 0.75);
+}
+.finale .dettaglio a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .nav,
@@ -599,6 +704,16 @@
   .testata {
     right: 72px;
   }
+  /* Logo Jakala nell'angolo in basso a sinistra, sopra tutte le slide */
+  .logoAngolo {
+    position: absolute;
+    left: 72px;
+    bottom: 48px;
+    z-index: 1;
+    width: 64px;
+    height: 64px;
+    margin: 0;
+  }
   .fase {
     left: 72px;
   }
@@ -763,7 +878,8 @@
     width: 480px;
   }
 
-  .telefono img {
+  .telefono img,
+  .telefono video {
     width: auto;
     height: 600px;
   }
@@ -800,6 +916,50 @@
   .copertina .sintesi {
     margin-top: 32px;
     font-size: 31px;
+  }
+  .copertina .oratori {
+    margin-top: 20px;
+    font-size: 24px;
+  }
+
+  /* Solo da attiva: altrimenti display:flex vince su .slide { display: none } e resta sopra tutte */
+  .finale[data-attiva] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .finale .titolo {
+    font-size: 72px;
+    max-width: 1500px;
+  }
+  .finale .corpo {
+    position: static;
+    margin-top: 64px;
+    gap: 24px;
+    justify-items: center;
+  }
+  .nomiFinale {
+    font-size: 31px;
+  }
+  .quinte {
+    gap: 40px;
+    flex-wrap: nowrap;
+  }
+  .polaroid {
+    padding: 14px 14px 56px;
+  }
+  .polaroid img {
+    height: 300px;
+  }
+  .foglio {
+    padding: 20px;
+  }
+  .foglio img {
+    height: 380px;
+  }
+  .finale .dettaglio {
+    font-size: 24px;
   }
 
   .contesto .corpo {

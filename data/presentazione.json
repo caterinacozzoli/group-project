@@ -87,6 +87,8 @@
     "titolo": "L'avatar di Libby",
     "contenuto": [
       "Libby non c'era nel Figma: l'abbiamo disegnata da zero. Il prompt per l'immagine l'ha scritto il Prompt maker, l'immagine l'ha generata Meta AI; poi l'abbiamo ritoccata e passata a Vizcom, che l'ha trasformata in un disegno vettoriale.",
+      { "immagine": "/presentazione/vizcom.png", "alt": "Vizcom: a sinistra la prima versione di Libby, un libro verde con gli occhi; a destra la versione semplificata senza occhi, generata con il prompt «crea una versione semplificata senza occhi meno kawaii…»", "w": 1200, "h": 542 },
+      "In Vizcom abbiamo provato anche strade diverse: qui la prima Libby, un libro con gli occhi, semplificata con un prompt. La versione semplificata è diventata l'avatar finale.",
       "Il formato SVG conta: un'immagine vettoriale resta nitida a ogni dimensione, dal bottone flottante al pannello della chat, e pesa pochissimo.",
       "Se ti serve un personaggio o un'icona, la catena è la stessa: prompt, immagine, ritocco, vettoriale."
     ],

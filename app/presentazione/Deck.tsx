@@ -204,7 +204,8 @@ export default function Deck({
       <main className={s.tela}>
         {/* Le slide spente sono display:none: l'h1 resta fuori, sempre presente */}
         <h1 className="sr-only">Presentazione: {slides[0].titolo}</h1>
-        <p className={s.testata}>Master Talent Garden · Settimana AI</p>
+        <p className={s.testata}>Share &amp; Tell – Experience Design</p>
+        <img className={s.logoAngolo} src={asset("/presentazione/loghi/jakala-quadrato.png")} alt="Jakala" width={160} height={160} />
         {slides.map((sl, k) => (
             <section
               key={k}

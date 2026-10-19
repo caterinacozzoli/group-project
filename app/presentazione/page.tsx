@@ -207,37 +207,47 @@ const CHECKLIST: ReactNode[] = [
   </>,
 ];
 
+// Le foto dietro le quinte (da dietro_le_quinte/, convertite da HEIC)
+const QUINTE: [string, string, number, number][] = [
+  ["/presentazione/quinte/foto-1.jpg", "Al lavoro in cucina, dietro il portatile", 900, 1200],
+  ["/presentazione/quinte/foto-2.jpg", "In salotto, con il cane e una collega collegata sulla TV", 1200, 900],
+  ["/presentazione/quinte/foto-3.jpg", "Selfie di gruppo per strada", 1200, 900],
+];
+
 const SLIDES: Slide[] = [
   {
     titolo: "Da Figma al prototipo con Antigravity",
-    fase: "Libraccio / Progetto",
+    fase: "Libraccio / Group Project TAG",
     sintesi: "Il workflow che abbiamo costruito nella settimana AI, tappa per tappa.",
     layout: s.copertina,
     corpo: (
-      <ul role="list" className={s.loghi} aria-label="Gli strumenti">
-        {LOGHI.map(([nome, testo]) => (
-          <li key={nome}>
-            <Logo nome={nome} />
-            {testo}
+      <>
+        <ul role="list" className={s.loghi} aria-label="Gli strumenti">
+          {LOGHI.map(([nome, testo]) => (
+            <li key={nome}>
+              <Logo nome={nome} />
+              {testo}
+            </li>
+          ))}
+          <li>
+            <img className={s.parola} src={asset("/presentazione/loghi/vizcom.svg")} alt="Vizcom" />
           </li>
-        ))}
-        <li>
-          <img className={s.parola} src={asset("/presentazione/loghi/vizcom.svg")} alt="Vizcom" />
-        </li>
-      </ul>
+        </ul>
+        <p className={s.oratori}>Cozzoli Caterina Maria · Domenighini Sara · Gattullo Gaia · Polimeni Alberto</p>
+      </>
     ),
   },
   {
     titolo: "Il contesto del progetto",
     fase: "Contesto",
-    sintesi: "Una settimana di sperimentazione AI, dalla pagina Libraccio al prototipo HTML.",
+    sintesi: "Una settimana di sperimentazione AI, dalla pagina Libraccio al prototipo React / Next.js.",
     layout: s.contesto,
     corpo: (
       <>
         <div className={s.colonne}>
           <Voce etichetta="Cliente" icona="book-open" titolo="Libraccio.it" freccia="destra">Homepage «Offerte e Outlet»</Voce>
           <Voce etichetta="Strumento" logo="antigravity" titolo="Antigravity" piu="antigravity" freccia="destra">Editor di codice con agenti AI</Voce>
-          <Voce etichetta="Attività" icona="code-xml" titolo="Generare la pagina" freccia="destra">Dal design Figma a un prototipo HTML funzionante</Voce>
+          <Voce etichetta="Attività" icona="code-xml" titolo="Generare la pagina" freccia="destra">Dal design Figma a un prototipo React / Next.js funzionante</Voce>
           <Voce etichetta="Risultato" icona="panels-top-left" titolo="Prototipo + AI">Homepage Outlet con Libby, la libraia digitale</Voce>
         </div>
         <div className={s.settimana}>
@@ -245,7 +255,6 @@ const SLIDES: Slide[] = [
           <h3 className={s.voceTitolo}>Settimana AI</h3>
           <p className={s.dettaglio}>Durante il Master Talent Garden</p>
         </div>
-        <Foto src="/presentazione/figma-home.png" alt="La homepage Libraccio nel Figma di Gaia" w={584} h={840} />
         <Imparato>
           Conta dove gira l&apos;agente. In Antigravity Claude lavora sul nostro computer: raggiunge il file Figma aperto, avvia il sito e lo controlla nel browser.
         </Imparato>
@@ -340,10 +349,6 @@ const SLIDES: Slide[] = [
             <Voce titolo={<code>companion/</code>}>L&apos;anima di Libby (tono, regole, limiti) e il suo avatar</Voce>
             <Voce titolo={<code>docs/</code>} piu="architettura">
               Architettura delle informazioni di Libraccio e variabili del design
-            </Voce>
-            <Voce titolo="Avatar" piu="avatar">
-              <img className={s.avatar} src={asset("/assets/brand/libby.svg")} alt="" width={48} height={48} />
-              Generato con Meta AI, ritoccato, poi vettorializzato con Vizcom
             </Voce>
           </div>
           <Imparato>L&apos;agente parte da file, non da spiegazioni a voce: meno ambiguità e un risultato ripetibile.</Imparato>
@@ -531,6 +536,42 @@ const SLIDES: Slide[] = [
     ),
   },
   {
+    titolo: "La verifica",
+    fase: "Fase 3 · Esecuzione",
+    sintesi: "L'agente controlla da solo quello che ha fatto.",
+    layout: `${s.duo} ${s.verifica}`,
+    corpo: (
+      <>
+        <div className={s.pila}>
+          <div className={s.righe}>
+            <Voce titolo="Playwright" piu="verifica-playwright">Apre il sito, simula un iPhone, clicca, scrive, fotografa e confronta con il Figma</Voce>
+            <Voce titolo="Accessibility agents" piu="verifica-accessibilita">Alt text, tastiera, screen reader, contrasti (WCAG 2.2 AA)</Voce>
+            <Voce titolo="Test">
+              <code>check:libby</code> controlla le regole di Libby
+            </Voce>
+          </div>
+          <Imparato piu="hook">
+            La verifica è ripetibile e veloce, senza test a mano. L&apos;accessibilità si controlla mentre si scrive: un hook ferma i file dell&apos;interfaccia
+            finché non passano la revisione.
+          </Imparato>
+        </div>
+        <figure className={`${s.foto} ${s.telefono}`}>
+          <video
+            src={asset("/presentazione/playwright-test.webm")}
+            autoPlay
+            loop
+            muted
+            playsInline
+            width={393}
+            height={852}
+            aria-label="Playwright che testa automaticamente il prototipo su un iPhone simulato"
+          />
+          <figcaption className={s.etichetta}>Playwright in azione</figcaption>
+        </figure>
+      </>
+    ),
+  },
+  {
     titolo: "Responsive senza disegnare i breakpoint",
     fase: "Fase 3 · Esecuzione",
     sintesi: "Dal solo mobile (393 px) a tablet e desktop.",
@@ -564,6 +605,10 @@ const SLIDES: Slide[] = [
             <Voce titolo="Status bar">Quella finta del Figma si nasconde sui telefoni veri</Voce>
             <Voce titolo="Margini">Rispettano notch, Dynamic Island e barra home</Voce>
             <Voce titolo="Aggiungi a Home">Icona Libraccio, si apre a tutto schermo</Voce>
+            <Voce titolo="Avatar" piu="avatar">
+              <img className={s.avatar} src={asset("/assets/brand/libby.svg")} alt="" width={48} height={48} />
+              Generato con Meta AI, ritoccato, poi vettorializzato con Vizcom
+            </Voce>
           </div>
           <Riquadro titolo="Cos'è una PWA" piu="pwa">
             Una Progressive Web App è un sito che si installa sulla Home senza passare dallo store. Bastano un manifest e un&apos;icona.
@@ -619,37 +664,7 @@ const SLIDES: Slide[] = [
       </>
     ),
   },
-  {
-    titolo: "La verifica",
-    fase: "Fase 3 · Esecuzione",
-    sintesi: "L'agente controlla da solo quello che ha fatto.",
-    layout: `${s.duo} ${s.verifica}`,
-    corpo: (
-      <>
-        <div className={s.pila}>
-          <div className={s.righe}>
-            <Voce titolo="Playwright" piu="verifica-playwright">Apre il sito, simula un iPhone, clicca, scrive, fotografa e confronta con il Figma</Voce>
-            <Voce titolo="Accessibility agents" piu="verifica-accessibilita">Alt text, tastiera, screen reader, contrasti (WCAG 2.2 AA)</Voce>
-            <Voce titolo="Test">
-              <code>check:libby</code> controlla le regole di Libby
-            </Voce>
-          </div>
-          <Imparato piu="hook">
-            La verifica è ripetibile e veloce, senza test a mano. L&apos;accessibilità si controlla mentre si scrive: un hook ferma i file dell&apos;interfaccia
-            finché non passano la revisione.
-          </Imparato>
-        </div>
-        <Foto
-          className={s.telefono}
-          src="/presentazione/phone-chat-3.png"
-          alt="Una conversazione con Libby su un iPhone simulato"
-          w={393}
-          h={852}
-          didascalia="Fotografato da Playwright"
-        />
-      </>
-    ),
-  },
+
   {
     titolo: "Dal locale alla condivisione",
     fase: "Condivisione",
@@ -694,6 +709,12 @@ const SLIDES: Slide[] = [
           </figcaption>
         </figure>
         <div className={s.pila}>
+          <p className={s.linkPrototipo}>
+            <a href={DEMO} target="_blank" rel="noopener noreferrer">
+              Apri il prototipo <span aria-hidden="true">↗</span>
+              <span className="sr-only"> (si apre in una nuova scheda)</span>
+            </a>
+          </p>
           <ol className={s.passi}>
             <li>
               <h3 className={s.voceTitolo}>Dal telefono</h3>
@@ -708,7 +729,6 @@ const SLIDES: Slide[] = [
               <p className={s.descrizione}>Mobile → tablet → desktop.</p>
             </li>
           </ol>
-          <p className={s.dettaglio}>Piano B: video registrato, se la rete non regge.</p>
         </div>
       </>
     ),
@@ -728,6 +748,39 @@ const SLIDES: Slide[] = [
           ))}
         </ol>
         <p className={s.messaggio}>Fedeltà dove serve, libertà dove aggiunge valore.</p>
+      </>
+    ),
+  },
+  {
+    titolo: "Grazie e buona esplorazione",
+    fase: "",
+    layout: s.finale,
+    corpo: (
+      <>
+        <ul role="list" className={s.quinte} aria-label="Dietro le quinte">
+          {QUINTE.slice(0, 2).map(([src, alt, w, h]) => (
+            <li key={src} className={s.polaroid}>
+              <img src={asset(src)} alt={alt} width={w} height={h} />
+            </li>
+          ))}
+          <li className={s.foglio}>
+            <img src={asset("/presentazione/quinte/logo-gruppo.png")} alt="Il logo del gruppo: noi quattro disegnati a linea continua" width={900} height={900} />
+          </li>
+          {QUINTE.slice(2).map(([src, alt, w, h]) => (
+            <li key={src} className={s.polaroid}>
+              <img src={asset(src)} alt={alt} width={w} height={h} />
+            </li>
+          ))}
+        </ul>
+        <p className={s.nomiFinale}>
+          Cozzoli Caterina Maria · Domenighini Sara · Gattullo Gaia · Polimeni Alberto
+        </p>
+        <p className={s.dettaglio}>
+          <a href={DEMO} target="_blank" rel="noopener noreferrer">
+            caterinacozzoli.github.io/group-project <span aria-hidden="true">↗</span>
+            <span className="sr-only"> (si apre in una nuova scheda)</span>
+          </a>
+        </p>
       </>
     ),
   },
