@@ -95,6 +95,7 @@ function Voce({
   titolo,
   piu,
   freccia,
+  tempo,
   children,
 }: {
   etichetta?: string;
@@ -103,6 +104,7 @@ function Voce({
   titolo: ReactNode;
   piu?: keyof typeof approfondimenti;
   freccia?: "destra" | "doppia";
+  tempo?: string;
   children?: ReactNode;
 }) {
   // Nel sorgente il titolo viene prima dell'etichetta (ordine di lettura); il CSS la riporta sopra
@@ -117,6 +119,7 @@ function Voce({
         </div>
       )}
       {children && <p className={s.descrizione}>{children}</p>}
+      {tempo && <p className={s.tempo}>{tempo}</p>}
     </div>
   );
 }
@@ -268,17 +271,22 @@ const SLIDES: Slide[] = [
     corpo: (
       <>
         <div className={s.colonne}>
-          <Voce etichetta="Fase 1 · Claude Desktop" icona="file-text" titolo="Preparazione" freccia="destra">
+          <Voce etichetta="Fase 1 · Claude Desktop" icona="file-text" titolo="Preparazione" freccia="destra" tempo="~15 min*">
             Pensare: Prompt maker, file di handoff, cartella di progetto.
           </Voce>
-          <Voce etichetta="Fase 2 · Antigravity" icona="cable" titolo="Configurazione" freccia="destra">
+          <Voce etichetta="Fase 2 · Antigravity" icona="cable" titolo="Configurazione" freccia="destra" tempo="~15 min*">
             Collegare: ponte con Figma, istruzioni, skill.
           </Voce>
-          <Voce etichetta="Fase 3 · Claude Code in Antigravity" icona="code-xml" titolo="Esecuzione" freccia="destra">
-            Costruire: homepage, responsive, app da telefono, Libby, verifica, pubblicazione.
+          <Voce etichetta="Fase 3 · Claude Code in Antigravity" icona="code-xml" titolo="Esecuzione" freccia="destra" tempo="~45 min">
+            Costruire: homepage, responsive, app da telefono, Libby, verifica.
           </Voce>
-          <Voce etichetta="Risultato" icona="panels-top-left" titolo="Prototipo online" />
+          <Voce etichetta="Risultato" icona="panels-top-left" titolo="Prototipo online" tempo="~15 min">
+            Pubblicare: GitHub, Actions, Pages.
+          </Voce>
         </div>
+        <p className={s.nota}>
+          Circa 1 h 30 in tutto. * Stima: Prompt maker, ponte con Figma e skill si preparano una volta e si riusano nei progetti successivi.
+        </p>
         <Imparato>
           Claude Desktop per decidere, conversando e leggendo il Figma con il connettore. Antigravity per costruire, perché lì l&apos;agente lavora sul computer.
         </Imparato>

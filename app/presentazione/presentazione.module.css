@@ -141,6 +141,15 @@
 .descrizione {
   color: var(--grigio);
 }
+/* Tempo di ogni fase (slide del workflow) */
+.tempo {
+  margin-top: auto;
+  font: 400 var(--t-voce) / 1.15 var(--titoli);
+}
+.nota {
+  font-size: var(--t-dettaglio);
+  color: var(--grigio);
+}
 
 .dettaglio {
   font-size: var(--t-dettaglio);
