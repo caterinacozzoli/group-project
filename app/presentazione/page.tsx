@@ -225,6 +225,7 @@ const SLIDES: Slide[] = [
     layout: s.copertina,
     corpo: (
       <>
+        <p className={s.oratori}>Cozzoli Caterina Maria · Domenighini Sara · Gattullo Gaia · Polimeni Alberto</p>
         <ul role="list" className={s.loghi} aria-label="Gli strumenti">
           {LOGHI.map(([nome, testo]) => (
             <li key={nome}>
@@ -236,7 +237,6 @@ const SLIDES: Slide[] = [
             <img className={s.parola} src={asset("/presentazione/loghi/vizcom.svg")} alt="Vizcom" />
           </li>
         </ul>
-        <p className={s.oratori}>Cozzoli Caterina Maria · Domenighini Sara · Gattullo Gaia · Polimeni Alberto</p>
       </>
     ),
   },
@@ -507,6 +507,39 @@ const SLIDES: Slide[] = [
     ),
   },
   {
+    titolo: "Libby, con poco",
+    fase: "Fase 3 · Esecuzione",
+    sintesi: "Una feature nuova: la libraia digitale.",
+    layout: `${s.trio} ${s.libby}`,
+    corpo: (
+      <>
+        <div className={s.righe}>
+          <Voce titolo="Anima" piu="anima">
+            <code>libby-anima.md</code>: tono, regole e limiti (al massimo 3 libri, mai titoli inventati)
+          </Voce>
+          <Voce titolo="Avatar" piu="avatar">
+            <img className={s.avatar} src={asset("/assets/brand/libby.svg")} alt="" width={48} height={48} />
+            Generato con Meta AI, ritoccato, poi vettorializzato con Vizcom
+          </Voce>
+          <Voce titolo="Motore">Regole locali che seguono l&apos;anima, senza API</Voce>
+          <Voce titolo="Interfaccia" piu="libby-chat">A tutto schermo sul telefono, pannello su desktop</Voce>
+          <Voce titolo="Design" piu="libby-design">Impeccable e UI/UX Pro Max, solo qui</Voce>
+        </div>
+        <div className={s.pila}>
+          <Imparato tema="senza API">
+            Zero costi, nessuna chiave nel repo pubblico, risposte prevedibili e testabili (<code>npm run check:libby</code>). Domani si collega a un modello AI vero,
+            con la stessa interfaccia.
+          </Imparato>
+          <Imparato tema="le skill solo qui">La homepage è il Figma e non si tocca. La libertà di design va dove aggiunge valore.</Imparato>
+        </div>
+        <div className={s.coppia}>
+          <Foto className={s.telefono} src="/presentazione/libby-welcome.png" alt="Libby si presenta: Ciao Marica, cosa leggiamo oggi?" w={393} h={852} />
+          <Foto className={s.telefono} src="/presentazione/phone-chat-2.png" alt="Libby consiglia tre gialli in offerta, con prezzo e carrello" w={393} h={852} />
+        </div>
+      </>
+    ),
+  },
+  {
     titolo: "Da Figma alle variabili e al codice",
     fase: "Fase 3 · Esecuzione",
     sintesi: "La homepage importata identica: variabili, componenti, stili, asset.",
@@ -613,10 +646,6 @@ const SLIDES: Slide[] = [
             <Voce titolo="Status bar">Quella finta del Figma si nasconde sui telefoni veri</Voce>
             <Voce titolo="Margini">Rispettano notch, Dynamic Island e barra home</Voce>
             <Voce titolo="Aggiungi a Home">Icona Libraccio, si apre a tutto schermo</Voce>
-            <Voce titolo="Avatar" piu="avatar">
-              <img className={s.avatar} src={asset("/assets/brand/libby.svg")} alt="" width={48} height={48} />
-              Generato con Meta AI, ritoccato, poi vettorializzato con Vizcom
-            </Voce>
           </div>
           <Riquadro titolo="Cos'è una PWA" piu="pwa">
             Una Progressive Web App è un sito che si installa sulla Home senza passare dallo store. Bastano un manifest e un&apos;icona.
@@ -643,36 +672,6 @@ const SLIDES: Slide[] = [
       </>
     ),
   },
-  {
-    titolo: "Libby, con poco",
-    fase: "Fase 3 · Esecuzione",
-    sintesi: "Una feature nuova: la libraia digitale.",
-    layout: s.trio,
-    corpo: (
-      <>
-        <div className={s.righe}>
-          <Voce titolo="Anima" piu="anima">
-            <code>libby-anima.md</code>: tono, regole e limiti (al massimo 3 libri, mai titoli inventati)
-          </Voce>
-          <Voce titolo="Motore">Regole locali che seguono l&apos;anima, senza API</Voce>
-          <Voce titolo="Interfaccia" piu="libby-chat">A tutto schermo sul telefono, pannello su desktop</Voce>
-          <Voce titolo="Design" piu="libby-design">Impeccable e UI/UX Pro Max, solo qui</Voce>
-        </div>
-        <div className={s.pila}>
-          <Imparato tema="senza API">
-            Zero costi, nessuna chiave nel repo pubblico, risposte prevedibili e testabili (<code>npm run check:libby</code>). Domani si collega a un modello AI vero,
-            con la stessa interfaccia.
-          </Imparato>
-          <Imparato tema="le skill solo qui">La homepage è il Figma e non si tocca. La libertà di design va dove aggiunge valore.</Imparato>
-        </div>
-        <div className={s.coppia}>
-          <Foto className={s.telefono} src="/presentazione/libby-welcome.png" alt="Libby si presenta: Ciao Marica, cosa leggiamo oggi?" w={393} h={852} />
-          <Foto className={s.telefono} src="/presentazione/phone-chat-2.png" alt="Libby consiglia tre gialli in offerta, con prezzo e carrello" w={393} h={852} />
-        </div>
-      </>
-    ),
-  },
-
   {
     titolo: "Dal locale alla condivisione",
     fase: "Condivisione",
@@ -710,34 +709,29 @@ const SLIDES: Slide[] = [
     layout: s.demo,
     corpo: (
       <>
-        <figure className={s.qr}>
-          <img src={asset("/presentazione/qr.svg")} alt="Codice QR del prototipo online" width={41} height={41} />
-          <figcaption>
-            <a href={DEMO}>caterinacozzoli.github.io/group-project</a>
-          </figcaption>
-        </figure>
-        <div className={s.pila}>
+        <div className={s.qr}>
           <p className={s.linkPrototipo}>
             <a href={DEMO} target="_blank" rel="noopener noreferrer">
               Apri il prototipo <span aria-hidden="true">↗</span>
               <span className="sr-only"> (si apre in una nuova scheda)</span>
             </a>
           </p>
-          <ol className={s.passi}>
-            <li>
-              <h3 className={s.voceTitolo}>Dal telefono</h3>
-              <p className={s.descrizione}>Homepage, poi Libby: chiedere un consiglio, aggiungere al carrello.</p>
-            </li>
-            <li>
-              <h3 className={s.voceTitolo}>Desktop</h3>
-              <p className={s.descrizione}>La stessa pagina allargata, con il pannello di Libby.</p>
-            </li>
-            <li>
-              <h3 className={s.voceTitolo}>⌘D</h3>
-              <p className={s.descrizione}>Mobile → tablet → desktop.</p>
-            </li>
-          </ol>
+          <img src={asset("/presentazione/qr.svg")} alt="Codice QR del prototipo online" width={41} height={41} />
         </div>
+        <ol className={s.passi}>
+          <li>
+            <h3 className={s.voceTitolo}>Dal telefono</h3>
+            <p className={s.descrizione}>Homepage, poi Libby: chiedere un consiglio, aggiungere al carrello.</p>
+          </li>
+          <li>
+            <h3 className={s.voceTitolo}>Desktop</h3>
+            <p className={s.descrizione}>La stessa pagina allargata, con il pannello di Libby.</p>
+          </li>
+          <li>
+            <h3 className={s.voceTitolo}>⌘D</h3>
+            <p className={s.descrizione}>Mobile → tablet → desktop.</p>
+          </li>
+        </ol>
       </>
     ),
   },

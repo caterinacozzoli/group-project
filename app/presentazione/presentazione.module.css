@@ -417,7 +417,6 @@
   image-rendering: pixelated;
 }
 
-.qr a,
 .link a {
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -442,7 +441,7 @@
 }
 
 .oratori {
-  margin-top: 16px;
+  margin-bottom: 16px;
   font-size: var(--t-dettaglio);
   color: var(--grigio);
 }
@@ -528,8 +527,7 @@
   text-underline-offset: 3px;
 }
 
-.nav,
-.vista {
+.nav {
   display: none;
 }
 
@@ -646,36 +644,7 @@
 /* ══ Tela 1920 × 1080 (stessa soglia di FLUSSO in Deck.tsx) ══ */
 
 @media (min-width: 1024px) and (min-height: 540px) {
-  /* "Vista continua" (data-continua) spegne la tela: slide impilate anche su schermi grandi */
-  .vista {
-    position: fixed;
-    left: 12px;
-    bottom: 12px;
-    display: block;
-    height: 44px;
-    padding: 0 16px;
-    border-radius: 22px;
-    color: var(--nero);
-    font: 400 15px / 1 var(--sans);
-  }
-  .vista:hover {
-    background: #f2f2f2;
-  }
-  .deck[data-continua] {
-    display: flow-root; /* il margine del bottone non esce dal deck */
-  }
-  .deck[data-continua] .vista {
-    position: static;
-    margin: 16px 16px 0;
-    background: var(--nero);
-    color: #fff;
-  }
-  .deck[data-continua] .tela {
-    max-width: 1040px;
-    margin-inline: auto;
-  }
-
-  .deck:not([data-continua]) {
+  .deck {
 
   & {
     /* Leggibilità in proiezione (frame 1920): etichette 18, dettagli 20, descrizioni 24. Titoli come nel Figma. */
@@ -713,14 +682,15 @@
   .testata {
     right: 72px;
   }
-  /* Logo Jakala nell'angolo in basso a sinistra, sopra tutte le slide */
+  /* Logo Jakala in basso al centro, sopra tutte le slide */
   .logoAngolo {
     position: absolute;
-    left: 72px;
+    left: 50%;
+    translate: -50% 0;
     bottom: 48px;
     z-index: 1;
-    width: 64px;
-    height: 64px;
+    width: 44px;
+    height: 44px;
     margin: 0;
   }
   .fase {
@@ -902,11 +872,11 @@
   /* Layout delle singole slide */
 
   .slide.copertina {
-    padding-top: 380px;
+    padding-top: 310px;
   }
   .copertina .corpo {
     top: auto;
-    bottom: 120px;
+    bottom: 176px;
   }
   .loghi {
     gap: 24px 56px;
@@ -926,9 +896,11 @@
     margin-top: 32px;
     font-size: 31px;
   }
+  /* Prima dei loghi, più piccoli della sintesi */
   .copertina .oratori {
-    margin-top: 20px;
-    font-size: 24px;
+    margin-bottom: 40px;
+    font-size: var(--t-dettaglio);
+    letter-spacing: 0.01em;
   }
 
   /* Solo da attiva: altrimenti display:flex vince su .slide { display: none } e resta sopra tutte */
@@ -1053,6 +1025,13 @@
   .trio .righe {
     --col: 280px;
   }
+  /* Libby ha cinque voci: telefoni più stretti, descrizioni più larghe */
+  .libby .corpo {
+    grid-template-columns: 1fr 420px 560px;
+  }
+  .libby .righe {
+    --col: 260px;
+  }
 
   .primaDopo {
     display: flex;
@@ -1157,5 +1136,97 @@
     min-width: 4.5em;
     text-align: center;
   }
+  }
+}
+
+/* ══ ?stampa: PDF 1920 × 1080, una slide per pagina e approfondimenti in appendice (scripts/esporta-pdf.mjs) ══ */
+
+@media (min-width: 1024px) and (min-height: 540px) {
+  .deck[data-stampa] {
+    --k: 1;
+    position: static;
+    overflow: visible;
+  }
+  .deck[data-stampa] .tela {
+    position: static;
+    height: auto;
+    transform: none;
+  }
+  .deck[data-stampa] .slide {
+    position: relative;
+    height: 1080px;
+    break-after: page;
+  }
+  .deck[data-stampa] .tela > .testata,
+  .deck[data-stampa] .tela > .logoAngolo,
+  .deck[data-stampa] .nav {
+    display: none;
+  }
+  .online {
+    position: absolute;
+    top: 96px;
+    right: 72px;
+    font-size: var(--t-dettaglio);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  /* Pagina orizzontale: testo su due colonne, così quasi ogni approfondimento sta in una pagina */
+  :global(html):has(.deck[data-stampa]) {
+    background: #fff;
+  }
+  .approfondimento {
+    padding: 96px 72px;
+    break-before: page;
+    columns: 2;
+    column-gap: 96px;
+    font: 400 24px / 1.55 var(--sans);
+  }
+  .approfondimento > * + * {
+    margin-top: 20px;
+  }
+  .approfondimento > .etichetta,
+  .approfondimento > .pannelloTitolo {
+    column-span: all;
+  }
+  .approfondimento .etichetta {
+    font-size: var(--t-etichetta);
+  }
+  .approfondimento .pannelloTitolo {
+    font-size: 56px;
+  }
+  .approfondimento .pannelloSotto {
+    font-size: 32px;
+  }
+  .approfondimento h2,
+  .approfondimento h3 {
+    break-after: avoid;
+  }
+  .approfondimento a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .approfondimento ol {
+    display: grid;
+    gap: 8px;
+    padding-left: 1.4em;
+    list-style: decimal;
+  }
+  .approfondimento pre {
+    padding: 20px;
+    border-radius: 4px;
+    background: #f4f4f4;
+    font: 18px / 1.5 var(--mono);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    break-inside: avoid;
+  }
+  .approfondimento img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 420px;
+    border: 1px solid var(--linea);
+    break-inside: avoid;
   }
 }

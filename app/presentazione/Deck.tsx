@@ -25,6 +25,41 @@ function chiudiRiquadro(d: HTMLDetailsElement) {
 // I `backtick` del JSON diventano <code>
 const testo = (t: string) => t.split(/`([^`]+)`/).map((p, k) => (k % 2 ? <code key={k}>{p}</code> : p));
 
+const ONLINE = "https://caterinacozzoli.github.io/group-project/presentazione/";
+
+function Contenuto({ a }: { a: Approfondimento }) {
+  return (
+    <>
+      {a.contenuto.map((b, k) =>
+        typeof b === "string" ? (
+          <p key={k}>{testo(b)}</p>
+        ) : "sottotitolo" in b ? (
+          <h3 key={k} className={s.pannelloSotto}>{b.sottotitolo}</h3>
+        ) : "passi" in b ? (
+          <ol key={k}>{b.passi.map((p, j) => <li key={j}>{testo(p)}</li>)}</ol>
+        ) : "immagine" in b ? (
+          <img key={k} src={asset(b.immagine)} alt={b.alt} width={b.w} height={b.h} />
+        ) : (
+          <pre key={k}><code>{b.codice}</code></pre>
+        ),
+      )}
+      {a.link && (
+        <ul role="list" className={s.link}>
+          {a.link.map((l) => (
+            <li key={l.url}>
+              <a href={l.url} target="_blank" rel="noopener noreferrer">
+                {l.testo}
+                <span aria-hidden="true"> ↗</span>
+                <span className="sr-only"> (si apre in una nuova scheda)</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
+  );
+}
+
 export default function Deck({
   slides,
   approfondimenti,
@@ -38,16 +73,16 @@ export default function Deck({
   const [i, setI] = useState(0);
   const [annuncio, setAnnuncio] = useState("");
   const [aperto, setAperto] = useState<string | null>(null);
-  const [continua, setContinua] = useState(false);
+  // ?stampa: tutte le slide una per pagina e gli approfondimenti in appendice, per il PDF (scripts/esporta-pdf.mjs)
+  const [stampa, setStampa] = useState(false);
+  const [origini, setOrigini] = useState<Record<string, string>>({});
   const radice = useRef<HTMLDivElement>(null);
   const pannello = useRef<HTMLDialogElement>(null);
   const corrente = useRef(0);
-  const piatta = useRef(false);
   const spostaFocus = useRef(false);
   corrente.current = i;
-  piatta.current = continua;
-  // Slide impilate: schermo piccolo o "Vista continua" (con lo zoom del browser il testo cresce davvero)
-  const flusso = () => piatta.current || matchMedia(FLUSSO).matches;
+  // Slide impilate su schermo piccolo (anche con lo zoom del browser: il testo cresce davvero)
+  const flusso = () => matchMedia(FLUSSO).matches;
 
   const vai = (n: number) => {
     const j = Math.max(0, Math.min(N - 1, n));
@@ -62,9 +97,9 @@ export default function Deck({
   useEffect(() => {
     if (!spostaFocus.current) return;
     spostaFocus.current = false;
-    // In vista continua si scorre fino alla slide corrente; sulla tela la pagina non deve muoversi
-    document.getElementById(String(i + 1))?.focus({ preventScroll: !piatta.current });
-  }, [i, continua]);
+    // Slide impilate: si scorre fino alla slide corrente; sulla tela la pagina non deve muoversi
+    document.getElementById(String(i + 1))?.focus({ preventScroll: !flusso() });
+  }, [i]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Scala della tela in JS: in Safari tan(atan2()) con vw/dvh dà 0 o valori sbagliati
   useEffect(() => {
@@ -147,6 +182,25 @@ export default function Deck({
     if (aperto) pannello.current?.showModal();
   }, [aperto]);
 
+  useEffect(() => setStampa(new URLSearchParams(location.search).has("stampa")), []);
+
+  // Nel PDF i bottoni non si cliccano: le lampadine diventano link all'appendice e i riquadri restano aperti
+  useEffect(() => {
+    if (!stampa) return;
+    const o: Record<string, string> = {};
+    document.querySelectorAll<HTMLElement>("[data-piu]").forEach((b) => {
+      const id = b.dataset.piu!;
+      o[id] ??= b.closest("section")!.id;
+      const l = document.createElement("a");
+      l.href = `#piu-${id}`;
+      l.className = b.className;
+      l.append(...b.childNodes);
+      b.replaceWith(l); // ponytail: DOM toccato a mano, ok perché in stampa React non ridisegna più le slide
+    });
+    document.querySelectorAll("details").forEach((d) => (d.open = true));
+    setOrigini(o);
+  }, [stampa]);
+
   // "Cosa abbiamo imparato" sono <details>: il mouse li apre passando sopra, clic o focus li fissano aperti
   const riquadro = (e: { target: EventTarget; relatedTarget: EventTarget | null }, sel: string) => {
     const d = (e.target as Element).closest<HTMLDetailsElement>(sel);
@@ -183,24 +237,12 @@ export default function Deck({
     <div
       ref={radice}
       className={`${s.deck} ${className}`}
-      data-continua={continua || undefined}
+      data-stampa={stampa || undefined}
       onClick={apri}
       onFocus={fissa}
       onPointerOver={sopra}
       onPointerOut={fuori}
     >
-      {/* Solo dove c'è la tela: impila tutte le slide, così lo zoom del browser ingrandisce il testo */}
-      <button
-        type="button"
-        className={s.vista}
-        aria-pressed={continua}
-        onClick={() => {
-          setContinua(!continua);
-          if (!continua) spostaFocus.current = true;
-        }}
-      >
-        Vista continua
-      </button>
       <main className={s.tela}>
         {/* Le slide spente sono display:none: l'h1 resta fuori, sempre presente */}
         <h1 className="sr-only">Presentazione: {slides[0].titolo}</h1>
@@ -211,7 +253,7 @@ export default function Deck({
               key={k}
               id={String(k + 1)}
               className={`${s.slide} ${sl.layout ?? ""}`}
-              data-attiva={k === i || undefined}
+              data-attiva={k === i || stampa || undefined}
               role="group"
               aria-roledescription="slide"
               aria-label={`${k + 1} di ${N}: ${sl.titolo}`}
@@ -223,8 +265,42 @@ export default function Deck({
               {sl.fase && <p className={s.fase}>{sl.fase}</p>}
               {sl.sintesi && <p className={s.sintesi}>{sl.sintesi}</p>}
               {sl.corpo && <div className={s.corpo}>{sl.corpo}</div>}
+              {stampa && (
+                <>
+                  <p className={s.testata}>Share &amp; Tell – Experience Design</p>
+                  <img className={s.logoAngolo} src={asset("/presentazione/loghi/jakala-quadrato.png")} alt="" width={160} height={160} />
+                  {k === 0 && (
+                    <a className={s.online} href={ONLINE}>
+                      Presentazione più comoda<span aria-hidden="true"> ↗</span>
+                      <span className="sr-only"> (versione interattiva online)</span>
+                    </a>
+                  )}
+                </>
+              )}
             </section>
         ))}
+        {stampa && (
+          <>
+            <section className={s.approfondimento} id="approfondimenti">
+              <h2 className={s.pannelloTitolo}>Approfondimenti</h2>
+              <ol>
+                {Object.entries(approfondimenti).map(([id, a]) => (
+                  <li key={id}><a href={`#piu-${id}`}>{a.titolo}</a></li>
+                ))}
+              </ol>
+            </section>
+            {Object.entries(approfondimenti).map(([id, a]) => (
+              <section key={id} className={s.approfondimento} id={`piu-${id}`}>
+                <p className={s.etichetta}>
+                  Approfondimento
+                  {origini[id] && <> · <a href={`#${origini[id]}`}>← torna alla slide {origini[id]}</a></>}
+                </p>
+                <h2 className={s.pannelloTitolo}>{a.titolo}</h2>
+                <Contenuto a={a} />
+              </section>
+            ))}
+          </>
+        )}
       </main>
 
       {/* aria-disabled e non disabled: a fine corsa il focus resta sul bottone invece di cadere sul body */}
@@ -260,32 +336,7 @@ export default function Deck({
             <>
               <p className={s.etichetta}>Approfondimento</p>
               <h2 id="approfondimento-titolo" className={s.pannelloTitolo}>{a.titolo}</h2>
-              {a.contenuto.map((b, k) =>
-                typeof b === "string" ? (
-                  <p key={k}>{testo(b)}</p>
-                ) : "sottotitolo" in b ? (
-                  <h3 key={k} className={s.pannelloSotto}>{b.sottotitolo}</h3>
-                ) : "passi" in b ? (
-                  <ol key={k}>{b.passi.map((p, j) => <li key={j}>{testo(p)}</li>)}</ol>
-                ) : "immagine" in b ? (
-                  <img key={k} src={asset(b.immagine)} alt={b.alt} width={b.w} height={b.h} />
-                ) : (
-                  <pre key={k}><code>{b.codice}</code></pre>
-                ),
-              )}
-              {a.link && (
-                <ul role="list" className={s.link}>
-                  {a.link.map((l) => (
-                    <li key={l.url}>
-                      <a href={l.url} target="_blank" rel="noopener noreferrer">
-                        {l.testo}
-                        <span aria-hidden="true"> ↗</span>
-                        <span className="sr-only"> (si apre in una nuova scheda)</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <Contenuto a={a} />
             </>
           )}
         </div>

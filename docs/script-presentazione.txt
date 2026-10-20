@@ -14,8 +14,8 @@ Come si legge
 
 Tempi indicativi
 - Oratore 1 · slide 1–5 · Contesto e preparazione · 8 minuti
-- Oratore 2 · slide 6–9 · Configurazione e primo codice · 8 minuti
-- Oratore 3 · slide 10–16 · Esecuzione, condivisione, demo, chiusura · 9 minuti + 5 di demo
+- Oratore 2 · slide 6–9 · Configurazione e Libby · 8 minuti
+- Oratore 3 · slide 10–17 · Codice, verifica, condivisione, demo, chiusura · 9 minuti + 5 di demo
 
 
 ══════════════════════════════════════════════
@@ -51,15 +51,14 @@ Cosa abbiamo imparato: le decisioni non devono restare nella memoria di una chat
 SLIDE 5 · La cartella di progetto
 A sinistra, in alto, la cartella com'era all'inizio: file sparsi, un README, l'anima di Libby, l'architettura delle informazioni, gli stili e le variabili.
 Sotto, com'è diventata: un brief con tutte le decisioni, il prompt di avvio, e tre cartelle. asset con le immagini del Figma, companion con l'anima e l'avatar di Libby, docs con l'architettura delle informazioni e le variabili del design.
-L'avatar di Libby l'abbiamo generato con Meta AI, ritoccato e poi vettorializzato con Vizcom, così è un SVG nitido a ogni dimensione.
 Cosa abbiamo imparato: l'agente parte da file, non da spiegazioni a voce. Meno ambiguità, risultato ripetibile.
-[+ docs: architettura] [+ Avatar]
+[+ docs: architettura]
 
 Passaggio: «Con la cartella pronta, si passa in Antigravity. Vi racconta [ORATORE 2] come l'abbiamo collegata a Figma.»
 
 
 ══════════════════════════════════════════════
-ORATORE 2 · slide 6–9 · Configurazione e primo codice
+ORATORE 2 · slide 6–9 · Configurazione e Libby
 ══════════════════════════════════════════════
 
 SLIDE 6 · Collegare Figma e Antigravity
@@ -89,7 +88,24 @@ Si installano dal terminale di Claude Code con /plugin.
 Cosa abbiamo imparato: sulla homepage niente skill che ne cambino l'aspetto, perché doveva restare identica al Figma. Le skill di design le abbiamo tenute per Libby.
 [+ una lampadina per ogni skill] [+ Installazione]
 
-SLIDE 9 · Da Figma alle variabili e al codice
+SLIDE 9 · Libby, con poco
+Le skill di design le abbiamo usate su una cosa sola: Libby, la libraia digitale, la feature nuova.
+La sua anima è un file: tono, regole e limiti, per esempio al massimo tre libri e mai titoli inventati.
+L'avatar l'abbiamo generato con Meta AI, ritoccato e poi vettorializzato con Vizcom, così è un SVG nitido a ogni dimensione.
+Il motore sono regole locali che seguono quell'anima, senza API.
+L'interfaccia è a tutto schermo sul telefono e a pannello su desktop. Qui, e solo qui, abbiamo usato le skill di design.
+Cosa abbiamo imparato, senza API: zero costi, nessuna chiave nel repository pubblico, risposte prevedibili e testabili. Domani si collega a un modello AI vero, con la stessa interfaccia.
+Cosa abbiamo imparato, le skill solo qui: la homepage è il Figma e non si tocca. La libertà di design va dove aggiunge valore.
+[+ Anima] [+ Avatar] [+ La chat] [+ Il carattere di Libby]
+
+Passaggio: «Questa è la parte nuova. Adesso [ORATORE 3] vi racconta come la homepage del Figma è diventata codice, come l'abbiamo verificata e messa online.»
+
+
+══════════════════════════════════════════════
+ORATORE 3 · slide 10–17 · Codice, verifica, condivisione, demo, chiusura
+══════════════════════════════════════════════
+
+SLIDE 10 · Da Figma alle variabili e al codice
 Primo risultato: la homepage importata identica.
 Le variabili, cioè colori, testi e spazi, le abbiamo preparate in Claude Desktop con il connettore Figma e completate in Antigravity leggendo il Figma. Si poteva fare anche partendo dai file di variabili e stili che avevamo già: le strade sono due, entrambe valide.
 Poi un componente di codice per ogni componente Figma, gli stessi font, le immagini esportate e smistate, i testi in file di dati.
@@ -97,38 +113,22 @@ Cosa sono i token: un'unica fonte per i valori del design. Se ne cambia uno, cam
 Cosa abbiamo imparato, l'intoppo: alcune immagini uscivano vuote perché il frame aveva attivo "ritaglia contenuto". Claude ci ha chiesto il permesso, l'ha disattivato per l'export e l'ha riattivato subito.
 [+ Variabili e stili di testo] [+ Lo stack]
 
-Passaggio: «Fin qui la copia fedele. Adesso [ORATORE 3] vi fa vedere cosa abbiamo aggiunto, e come l'abbiamo messo online.»
+SLIDE 11 · La verifica
+L'agente controlla da solo quello che ha fatto. Con Playwright apre il sito, simula un iPhone, clicca, scrive, fotografa e confronta con il Figma. Lo screenshot che vedete l'ha fatto lui.
+Gli accessibility agents controllano alt text, tastiera, screen reader e contrasti.
+Cosa abbiamo imparato: la verifica è veloce e ripetibile. E l'accessibilità si controlla mentre si scrive: un hook, cioè una regola che Claude Code esegue da solo, ferma i file dell'interfaccia finché non passano la revisione.
+[+ Cos'è un hook] [+ Playwright] [+ Accessibility agents]
 
-
-══════════════════════════════════════════════
-ORATORE 3 · slide 10–16 · Esecuzione, condivisione, demo, chiusura
-══════════════════════════════════════════════
-
-SLIDE 10 · Responsive senza disegnare i breakpoint
+SLIDE 12 · Responsive senza disegnare i breakpoint
 Il Figma aveva solo il mobile, 393 pixel. Tablet e desktop non erano disegnati: li abbiamo fatti costruire allargando margini e griglie, fino a 1280 pixel di contenuto.
 Per controllarli abbiamo chiesto uno strumento: premendo Cmd+D la pagina passa da mobile a tablet a desktop, dentro le cornici di iPhone e iPad.
 Cosa abbiamo imparato: Cmd+D l'abbiamo chiesto in una frase e l'agente l'ha costruito per questo progetto. Ogni progetto può avere le sue scorciatoie.
 [+ L'anteprima Cmd+D]
 
-SLIDE 11 · Come un'app sul telefono
+SLIDE 13 · Come un'app sul telefono
 Aperto dal telefono, il sito sembra un'app: la status bar finta del Figma sparisce, i margini rispettano notch e barra home, e si può aggiungere alla Home con l'icona Libraccio.
 Cos'è una PWA: una Progressive Web App è un sito che si installa sulla Home senza passare dallo store. Bastano un manifest e un'icona.
 [+ PWA]
-
-SLIDE 12 · Libby, con poco
-La feature nuova è Libby, la libraia digitale.
-La sua anima è un file: tono, regole e limiti, per esempio al massimo tre libri e mai titoli inventati.
-Il motore sono regole locali che seguono quell'anima, senza API.
-L'interfaccia è a tutto schermo sul telefono e a pannello su desktop. Qui, e solo qui, abbiamo usato le skill di design.
-Cosa abbiamo imparato, senza API: zero costi, nessuna chiave nel repository pubblico, risposte prevedibili e testabili. Domani si collega a un modello AI vero, con la stessa interfaccia.
-Cosa abbiamo imparato, le skill solo qui: la homepage è il Figma e non si tocca. La libertà di design va dove aggiunge valore.
-[+ Anima] [+ La chat] [+ Il carattere di Libby]
-
-SLIDE 13 · La verifica
-L'agente controlla da solo quello che ha fatto. Con Playwright apre il sito, simula un iPhone, clicca, scrive, fotografa e confronta con il Figma. Lo screenshot che vedete l'ha fatto lui.
-Gli accessibility agents controllano alt text, tastiera, screen reader e contrasti.
-Cosa abbiamo imparato: la verifica è veloce e ripetibile. E l'accessibilità si controlla mentre si scrive: un hook, cioè una regola che Claude Code esegue da solo, ferma i file dell'interfaccia finché non passano la revisione.
-[+ Cos'è un hook] [+ Playwright] [+ Accessibility agents]
 
 SLIDE 14 · Dal locale alla condivisione
 Una cosa che si dà per scontata: vederlo sul nostro computer non vuol dire averlo pubblicato. Con npm run dev il sito gira su localhost, e lo vediamo solo noi.
@@ -146,4 +146,7 @@ Piano B: se la rete non regge, facciamo partire il video registrato.
 SLIDE 16 · Rifarlo da zero
 Chiudiamo con la parte che si porta via: lo stesso ambiente, per il prossimo progetto. Otto passi.
 Uno spazio Claude con istruzioni e knowledge base. Una cartella ordinata. Antigravity con claude nel terminale. Il ponte con Figma. Le skill che servono, solo dove servono. Un prompt breve, con le domande prima e le ipotesi alla fine. La verifica. E git push, che pubblica da solo.
-Fedeltà dove serve, libertà dove aggiunge valore. Grazie, e se avete domande, siamo qui.
+Fedeltà dove serve, libertà dove aggiunge valore.
+
+SLIDE 17 · Grazie e buona esplorazione
+Grazie, e se avete domande, siamo qui.
